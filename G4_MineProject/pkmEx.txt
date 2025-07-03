@@ -1,0 +1,15 @@
+prop기본생성자 amount=1;
+
+equipment amount =1 고정 
+equipment 부위 1~5까지 로 결정
+List<Equipment> Equipped 배열에 부위를 idx로 생각하고 넣기
+
+resource,food 는 획득하면 배열에 있는지확인
+								ㄴ 배열에 있으면 amount 증가
+								ㄴ없으면 넣기 amount=1
+
+
+공통, 프로젝트1(status),2(menu)생성하고 
+	nuget패키지관리 - Newtonsoft.json 설치
+프로젝트2에 class 작성
+프로젝트1에서 프로젝트2참조하고 using menu; 하면 클래스사용가능
