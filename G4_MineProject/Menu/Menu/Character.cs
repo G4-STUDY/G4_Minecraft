@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media.Imaging;
 
-namespace G4_WPF_PROJECT
+namespace Menu
 {
     public class Character
     {

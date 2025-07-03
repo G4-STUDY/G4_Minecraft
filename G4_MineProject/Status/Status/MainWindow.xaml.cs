@@ -1,6 +1,4 @@
-﻿using Menu;
-using Newtonsoft.Json;
-using System.IO;
+﻿using System.IO;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
@@ -13,6 +11,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Menu;
+using Newtonsoft.Json;
 
 namespace Status
 {
@@ -108,7 +108,7 @@ namespace Status
                 IPAddress addr = IPAddress.Any;
                 TcpListener listener = new TcpListener(addr, 1234);
                 listener.Start();
-                Console.WriteLine("서버 시작");
+                MessageBox.Show("서버실행");
 
                 while (true)
                 {
@@ -116,6 +116,7 @@ namespace Status
                     CServer s = new CServer(client);
                     if (s != null)
                     {
+                        MessageBox.Show("유저접속");
                         lock (servers) servers.Add(s);
                         try
                         {

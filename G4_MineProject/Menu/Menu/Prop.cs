@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace G4_WPF_PROJECT
+namespace Menu
 {
     public class Prop
     {
