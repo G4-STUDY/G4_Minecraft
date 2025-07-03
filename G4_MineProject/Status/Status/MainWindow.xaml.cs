@@ -63,9 +63,11 @@ namespace Status
                 if (type == "Prop")
                 {
                     Prop received = root["Data"].ToObject<Prop>();
-                    switch (received.actionType)
+                    string act = root["Act"]?.ToString();
+
+                    switch (act)
                     {
-                        case 1:
+                        case "1":
                             // Prop 구매 처리 로직
                             /*
                                 chac.money-=recevie.price
@@ -73,7 +75,7 @@ namespace Status
                                 chac.inventory.add(receive);
                              */
                             break;
-                        case 2:
+                        case "2":
                             // Prop 획득 처리 로직
                             /*
                                chac.inventory.add(receive);
@@ -112,6 +114,7 @@ namespace Status
             var wrapper = new
             {
                 Type = "Prop",
+                Act = "1",//1이면 buy 2면 획득 바꿔서 사용
                 Data = p
             };
             string json = JsonConvert.SerializeObject(wrapper);
