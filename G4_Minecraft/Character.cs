@@ -41,5 +41,21 @@ namespace G4_WPF_PROJECT
             get { return equipped; }
             set { equipped = value; }
         }
+        public bool BuyProp(Shop shop, Prop prop)
+        {
+            return shop.Sell(prop, this);
+        }
+
+        public void AddProp(Prop prop)
+        {
+            Prop existing = inventory.Find(p => p.Name == prop.Name);
+
+            if(existing == null && existing.Amount >= 64)
+            {
+                //새로 만들어서 추가
+            }
+
+            inventory.Add(prop);
+        }
     }
 }

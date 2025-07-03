@@ -39,7 +39,7 @@ namespace G4_WPF_PROJECT
             this.amount = amount;
             this.imgsource = imgsource;
         }
-        //판매
+
     }
 
     public class Resource : Prop
