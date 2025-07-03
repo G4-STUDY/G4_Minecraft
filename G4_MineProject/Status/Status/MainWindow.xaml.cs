@@ -1,4 +1,9 @@
-﻿using System.IO;
+﻿using Menu;
+using Menu.Classes;
+using Menu.Pages;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System.IO;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
@@ -11,10 +16,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Menu;
-using Menu.Classes;
-using Menu.Pages;
-using Newtonsoft.Json;
 
 namespace Status
 {
@@ -57,27 +58,38 @@ namespace Status
             {
                 bytesRead = stream.Read(buffer, 0, buffer.Length);
                 json = Encoding.UTF8.GetString(buffer, 0, bytesRead);
+                JObject root = JObject.Parse(json);
+                string type = root["Type"]?.ToString();
+                if (type == "Prop")
+                {
+                    Prop received = root["Data"].ToObject<Prop>();
+                    switch (received.actionType)
+                    {
+                        case 1:
+                            // Prop 구매 처리 로직
+                            /*
+                                chac.money-=recevie.price
+                                //돈이없을때 예외처리
+                                chac.inventory.add(receive);
+                             */
+                            break;
+                        case 2:
+                            // Prop 획득 처리 로직
+                            /*
+                               chac.inventory.add(receive);
+                             */
+                            break;
 
-                Prop received = JsonConvert.DeserializeObject<Prop>(json);
-                switch (received.actionType) {
-                    case 1:
-                        // Prop 구매 처리 로직
-                        /*
-                            chac.money-=recevie.price
-                            //돈이없을때 예외처리
-                            chac.inventory.add(receive);
-                         */
-                        break;
-                    case 2:
-                        // Prop 획득 처리 로직
-                        /*
-                           chac.inventory.add(receive);
-                         */
-                        break;
-
+                    }
+                }
+                else if(type == "charactor")
+                {
+                    Character chac = root["Data"].ToObject<Character>();
+                    //캐릭터 갱신 메소드
+                    break;
                 }
 
-                
+
                 ////MainWindow.curwindow.writetext(msg); //
                 //lock (MainWindow.servers) 
                 //{  
@@ -97,10 +109,23 @@ namespace Status
         }
         public void SendProp(Prop p)
         {
-            string json = JsonConvert.SerializeObject(p);
+            var wrapper = new
+            {
+                Type = "Prop",
+                Data = p
+            };
+            string json = JsonConvert.SerializeObject(wrapper);
             byte[] data = Encoding.UTF8.GetBytes(json);
             stream.Write(data, 0, data.Length);
         }
+
+        public void SendCharactor(Character c)
+        {
+            string json = JsonConvert.SerializeObject(c);
+            byte[] data = Encoding.UTF8.GetBytes(json);
+            stream.Write(data, 0, data.Length);
+        }
+
         public void write(string msg)
         {
             writer.WriteLine(msg);
