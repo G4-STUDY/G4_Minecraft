@@ -17,3 +17,7 @@ Inventoty_insert(Prop)함수
 		ㄴ없으면 넣기 amount=1
 Inventoty_Pop( idx, num)함수
 	resource,food 인벤토리에 있는거 -num
+
+
+//
+c# wpf 서버랑 wpf클라이언트를 쓰는데 서로 json형식으로 Prop class를 주고받아 근데 서버에서 thread를 통해 계속 client가 보낸 prop을 받는데 client가 prop을 보내는경우가 두가지있어 prop을 획득한 경우와 prop을 구매하는경우가 있는데 이를 어떻게 구분해서 받을수있을까? -copilot한테 질문하고 추가
