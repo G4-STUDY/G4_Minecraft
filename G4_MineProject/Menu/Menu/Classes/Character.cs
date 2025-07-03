@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media.Imaging;
 
-namespace Menu
+namespace Menu.Classes
 {
     public class Character
     {

@@ -12,6 +12,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Menu;
+using Menu.Classes;
+using Menu.Pages;
 using Newtonsoft.Json;
 
 namespace Status

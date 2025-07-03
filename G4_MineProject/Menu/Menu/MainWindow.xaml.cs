@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Menu.Classes;
+using Newtonsoft.Json;
 using System.IO;
 using System.Net;
 using System.Net.Sockets;
@@ -17,16 +18,25 @@ using System.Windows.Shapes;
 
 namespace Menu
 {
-    //public Page curpage;
-    //public MainPage mainpage;
-    //public Page1 page1;
-    //public Page2 page2;
-
     public partial class MainWindow : Window
     {
+
+        static public Page curpage;
+        static public MainWindow mainWindow;
+        public Pages.Mainpage mainpage;
+        public Pages.Minepage minepage;
+        public Pages.Shoppage shoppage;
+        public Frame MainFrameAccessor => MainFrame;
+
         public MainWindow()
         {
             InitializeComponent();
+            mainWindow = this;
+            mainpage=new Pages.Mainpage();
+            minepage = new Pages.Minepage();
+            shoppage = new Pages.Shoppage();
+            SwitchPage(mainpage);
+            curpage = mainpage;
         }
 
         private NetworkStream stream;
@@ -101,6 +111,12 @@ namespace Menu
             string json = JsonConvert.SerializeObject(p);
             byte[] data = Encoding.UTF8.GetBytes(json);
             stream.Write(data, 0, data.Length);
+        }
+
+        public void SwitchPage(Page page)
+        {
+            curpage = page;
+            MainFrameAccessor.Navigate(page);
         }
 
         //다른 페이지에서 쓸 prop전달 메소드 
