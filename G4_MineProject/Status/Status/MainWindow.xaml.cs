@@ -245,7 +245,7 @@ namespace Status
                 amount = Int32.Parse(amountv.Text);
                 health = Int32.Parse(healthv.Text);
 
-                Food newProp = new Food(name, price, amount, imgsource);
+                Food newProp = new Food(name, price, amount, imgsource,health);
                 AddProp(newProp);
             }
 
