@@ -13,7 +13,7 @@ namespace Menu.Classes
         private int price;
         private int amount;
         private string imgsource;
-
+        public int actionType;
         public event PropertyChangedEventHandler? PropertyChanged;
         protected void OnPropertyChanged(string name)
         {
@@ -45,30 +45,31 @@ namespace Menu.Classes
             get { return imgsource; }
             set { imgsource = value; }
         }
-        public Prop(string name, int price, int amount, string imgsource)
+        public Prop(string name, int price, int amount, string imgsource,int action)
         {
             this.name = name;
             this.price = price;
             this.amount = amount;
             this.imgsource = imgsource;
+            this.actionType = action;
         }
 
         public virtual Prop CloneWithAmount(int amount)
         {
-            return new Prop(Name, Price, amount, Imgsource);
+            return new Prop(Name, Price, amount, Imgsource,actionType);
         }
     }
 
     public class Resource : Prop
     {
-        public Resource(string name, int price, int amount, string imgsource) : base(name, price, amount, imgsource)
+        public Resource(string name, int price, int amount, string imgsource,int action) : base(name, price, amount, imgsource,action)
         {
 
         }
         //??
         public override Prop CloneWithAmount(int amount)
         {
-            return new Resource(Name, Price, amount, Imgsource);
+            return new Resource(Name, Price, amount, Imgsource, actionType);
         }
     }
     public class Equipment : Prop
@@ -85,7 +86,7 @@ namespace Menu.Classes
             get { return damage; }
             set { damage = value; }
         }
-        public Equipment(string name, int price, int amount, string imgsource, int force, int damage) : base(name, price, amount, imgsource)
+        public Equipment(string name, int price, int amount, string imgsource, int force, int damage) : base(name, price, amount, imgsource,1)
         {
             this.force = force;
             this.damage = damage;
@@ -106,7 +107,7 @@ namespace Menu.Classes
             get { return healnum; }
             set { healnum = value; }
         }
-        public Food(string name, int price, int amount, string imgsource, int healnum) : base(name, price, amount, imgsource)
+        public Food(string name, int price, int amount, string imgsource, int healnum) : base(name, price, amount, imgsource,1)
         {
             this.healnum = healnum;
             //음식 먹기
