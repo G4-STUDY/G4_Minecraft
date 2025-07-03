@@ -277,7 +277,7 @@ namespace Status
                 price = Int32.Parse(pricev.Text);
                 amount = Int32.Parse(amountv.Text);
 
-                Resource newProp = new Resource(name, price, amount, imgsource,1);
+                Resource newProp = new Resource(name, price, amount, imgsource);
                 AddProp(newProp);
 
             }

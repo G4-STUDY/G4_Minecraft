@@ -1,5 +1,7 @@
 ﻿using Menu.Classes;
+using Menu.Pages;
 using Newtonsoft.Json;
+using System;
 using System.IO;
 using System.Net;
 using System.Net.Sockets;
@@ -15,7 +17,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-
 namespace Menu
 {
     public partial class MainWindow : Window
@@ -26,19 +27,24 @@ namespace Menu
         public Pages.Mainpage mainpage;
         public Pages.Minepage minepage;
         public Pages.Shoppage shoppage;
+        public Pages.Forest forest;
+        public Pages.Mine mine;
         public Frame MainFrameAccessor => MainFrame;
 
         public MainWindow()
         {
             InitializeComponent();
             mainWindow = this;
-            mainpage=new Pages.Mainpage();
+            MyCharacter = new Character();
+            mainpage =new Pages.Mainpage();
             minepage = new Pages.Minepage();
             shoppage = new Pages.Shoppage();
+            forest = new Pages.Forest();
+            mine = new Pages.Mine();
             SwitchPage(mainpage);
             curpage = mainpage;
         }
-
+        public static Character MyCharacter;
         private NetworkStream stream;
         private StreamWriter writer;
         private StreamReader reader;
@@ -60,18 +66,18 @@ namespace Menu
         protected override void OnInitialized(EventArgs e)
         {
             base.OnInitialized(e);
-            client = new TcpClient();
-            string serverIP = GetLocalIP();
-            client.Connect(serverIP, 1234);
-            if (client != null)
-            {
-                MessageBox.Show("서버접속완료");
-            }
-            stream = client.GetStream();
-            reader = new StreamReader(stream);
-            writer = new StreamWriter(stream);
-            Thread th = new Thread(new ThreadStart(readMsg));
-            th.Start();
+            //client = new TcpClient();
+            //string serverIP = GetLocalIP();
+            //client.Connect(serverIP, 1234);
+            //if (client != null)
+            //{
+            //    MessageBox.Show("서버접속완료");
+            //}
+            //stream = client.GetStream();
+            //reader = new StreamReader(stream);
+            //writer = new StreamWriter(stream);
+            //Thread th = new Thread(new ThreadStart(readMsg));
+            //th.Start();
 
         }
 
@@ -117,6 +123,16 @@ namespace Menu
         {
             curpage = page;
             MainFrameAccessor.Navigate(page);
+            if (page is Forest)
+            {
+                Forest fore = (Forest)page;
+                fore.CharHp.Value=MyCharacter.Hp;
+            }
+            else if(page is Mine)
+            {
+                Mine mine = (Mine)page;
+                mine.CharHp.Value = MyCharacter.Hp;
+            }
         }
 
         //다른 페이지에서 쓸 prop전달 메소드 

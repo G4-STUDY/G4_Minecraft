@@ -12,7 +12,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-
 namespace Menu.Pages
 {
     /// <summary>
@@ -33,6 +32,11 @@ namespace Menu.Pages
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             MainWindow.mainWindow.SwitchPage(MainWindow.mainWindow.minepage);
+        }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            MainWindow.MyCharacter.Hp = 100;
         }
     }
 }

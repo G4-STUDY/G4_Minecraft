@@ -29,5 +29,19 @@ namespace Menu.Pages
         {
             MainWindow.mainWindow.SwitchPage(MainWindow.mainWindow.mainpage);
         }
+
+        private void GoToMine(object sender, RoutedEventArgs e)
+        {
+            MainWindow.mainWindow.SwitchPage(MainWindow.mainWindow.mine);
+        }
+        private void GoToForest(object sender, RoutedEventArgs e)
+        {
+            MainWindow.mainWindow.SwitchPage(MainWindow.mainWindow.forest);
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            MainWindow.mainWindow.SwitchPage(MainWindow.mainWindow.mainpage);
+        }
     }
 }
