@@ -37,7 +37,7 @@
             <Button Content="save" Grid.Row="6" Grid.ColumnSpan="2" Click="Button_Click_Save" />
         </Grid>
         <Grid Width="510">
-
+      
             <DataGrid 
             x:Name="inventory" 
             IsReadOnly="True" 
