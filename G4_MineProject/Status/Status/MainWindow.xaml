@@ -6,9 +6,75 @@
         xmlns:local="clr-namespace:Status"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <StackPanel Orientation="Vertical">
-        <TextBox FontSize="20" x:Name="title" TextWrapping="Wrap" Text="여기는 상태창" Width="795" Height="42"/>
-        <TextBlock FontSize="20" x:Name="body" TextWrapping="Wrap" Text="" Height="246" Width="797"/>
+    <StackPanel Orientation="Horizontal">
+        <Grid Width="123">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <TextBlock Text="name" Grid.Row="0" Grid.Column="0"/>
+            <TextBox x:Name="namev" Grid.Row="0" Grid.Column="1"/>
+            <TextBlock Text="price" Grid.Row="1" Grid.Column="0"/>
+            <TextBox x:Name="pricev" Grid.Row="1" Grid.Column="1"/>
+            <TextBlock Text="amount" Grid.Row="2" Grid.Column="0"/>
+            <TextBox x:Name="amountv" Grid.Row="2" Grid.Column="1"/>
+            <TextBlock Text="force" Grid.Row="3" Grid.Column="0"/>
+            <TextBox x:Name="forcev" Grid.Row="3" Grid.Column="1"/>
+            <TextBlock Text="damage" Grid.Row="4" Grid.Column="0"/>
+            <TextBox x:Name="damagev" Grid.Row="4" Grid.Column="1"/>
+            <TextBlock Text="health" Grid.Row="5" Grid.Column="0"/>
+            <TextBox x:Name="healthv" Grid.Row="5" Grid.Column="1"/>
+
+            <Button Content="save" Grid.Row="6" Grid.ColumnSpan="2" Click="Button_Click_Save" />
+        </Grid>
+        <Grid Width="510">
+
+            <DataGrid 
+            x:Name="inventory" 
+            IsReadOnly="True" 
+            SelectionUnit="Cell" 
+            AutoGenerateColumns="False" 
+            CanUserAddRows="False" 
+            Margin="0,201,0,0" 
+            SelectionChanged="inventory_CurrentCellChanged">
+            </DataGrid>
+        </Grid>
+        <Grid Height="226" Width="137" VerticalAlignment="Top">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <TextBlock Text="Name" Grid.Row="0" Grid.Column="0"/>
+            <TextBox x:Name="Namev" Grid.Row="0" Grid.Column="1"/>
+            <TextBlock Text="Price" Grid.Row="1" Grid.Column="0"/>
+            <TextBox x:Name="Pricev" Grid.Row="1" Grid.Column="1"/>
+            <TextBlock Text="Amount" Grid.Row="2" Grid.Column="0"/>
+            <TextBox x:Name="Amountv" Grid.Row="2" Grid.Column="1"/>
+            <TextBlock Text="Force" Grid.Row="3" Grid.Column="0"/>
+            <TextBox x:Name="Forcev" Grid.Row="3" Grid.Column="1"/>
+            <TextBlock Text="Damage" Grid.Row="4" Grid.Column="0"/>
+            <TextBox x:Name="Damagev" Grid.Row="4" Grid.Column="1"/>
+            <TextBlock Text="Health" Grid.Row="5" Grid.Column="0"/>
+            <TextBox x:Name="Healthv" Grid.Row="5" Grid.Column="1"/>
+        </Grid>
     </StackPanel>
 
 </Window>
