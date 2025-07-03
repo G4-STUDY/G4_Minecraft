@@ -36,5 +36,9 @@ namespace Menu.Pages
             //MainWindow.mainWindow.SendProp(exprop);
         }
 
+        private void Buy_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

@@ -9,7 +9,48 @@
       Title="Shoppage">
     <StackPanel Orientation="Vertical">
         <TextBox FontSize="20" x:Name="title" TextWrapping="Wrap" Text="여기는 상점" Width="795" Height="42"/>
-        <TextBlock FontSize="20" x:Name="body" TextWrapping="Wrap" Text="" Height="246" Width="797"/>
+        <DataGrid x:Name="equipmentList"
+              AutoGenerateColumns="False"
+              Width="700"
+              Background="Transparent"
+              ScrollViewer.VerticalScrollBarVisibility="Auto"
+              ScrollViewer.HorizontalScrollBarVisibility="Auto">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="name" Binding="{Binding Name}" />
+                <DataGridTextColumn Header="price" Binding="{Binding Price}" />
+                <DataGridTextColumn Header="amount" Binding="{Binding Amount}" />
+                <DataGridTemplateColumn Header="Image" Width="100" IsReadOnly="True">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Image Source="{Binding Imgsource}" Width="60" Height="60"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <DataGrid x:Name="foodList"
+              AutoGenerateColumns="False"
+              Width="700"
+              Background="Transparent"
+              ScrollViewer.VerticalScrollBarVisibility="Auto"
+              ScrollViewer.HorizontalScrollBarVisibility="Auto">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="name" Binding="{Binding Name}" />
+                <DataGridTextColumn Header="price" Binding="{Binding Price}" />
+                <DataGridTextColumn Header="amount" Binding="{Binding Amount}" />
+                <DataGridTemplateColumn Header="Image" Width="100" IsReadOnly="True">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Image Source="{Binding Imgsource}" Width="60" Height="60"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button x:Name="buy" Content="사기" HorizontalAlignment="Left" Height="36" Margin="133,406,0,0" VerticalAlignment="Top" Width="179" Click="Buy_Click"/>
+        <Button x:Name="sell" Content="팔기" HorizontalAlignment="Left" Height="36" Margin="492,401,0,0" VerticalAlignment="Top" Width="179" Click="sell_Click"/>
+        <TextBlock x:Name="money" HorizontalAlignment="Left" Margin="630,19,0,0" TextWrapping="Wrap" Text="{Binding Money}" VerticalAlignment="Top" Width="120"/>
+
         <TextBox FontSize="20" x:Name="input" TextWrapping="Wrap" Text="" Width="795" Height="42"/>
         <Button FontSize="20" Content="메뉴로" Height="48" Click="Button_Click"/>
     </StackPanel>
