@@ -6,7 +6,9 @@
         xmlns:local="clr-namespace:Status"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
+    <StackPanel Orientation="Vertical">
+        <TextBox FontSize="20" x:Name="title" TextWrapping="Wrap" Text="여기는 상태창" Width="795" Height="42"/>
         <TextBlock FontSize="20" x:Name="body" TextWrapping="Wrap" Text="" Height="246" Width="797"/>
-    </Grid>
+    </StackPanel>
+
 </Window>
