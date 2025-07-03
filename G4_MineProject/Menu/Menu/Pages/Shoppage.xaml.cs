@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Menu.Classes;
 
 namespace Menu.Pages
 {
@@ -29,5 +30,11 @@ namespace Menu.Pages
         {
             MainWindow.mainWindow.SwitchPage(MainWindow.mainWindow.mainpage);
         }
+        private void Inventory_Send(object sender, RoutedEventArgs e)
+        {
+           // Prop exprop = new Prop();//프랍생성
+            //MainWindow.mainWindow.SendProp(exprop);
+        }
+
     }
 }

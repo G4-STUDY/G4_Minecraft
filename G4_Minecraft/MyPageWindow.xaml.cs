@@ -26,7 +26,11 @@ namespace G4_WPF_PROJECT
         public MyPageWindow()
         {
             InitializeComponent();
+
+            character.Inventory.Add(new Resource("자원1", 1000, 5, "resource\\ex1.jpg"));
+
             inventory.ItemsSource = character.Inventory;
+           
         }
     }
 }

@@ -48,6 +48,22 @@ namespace Menu.Classes
             character.AddProp(prop); // 캐릭터 인벤토리에 추가
             return true;
         }
+
+        // 자원 구매
+        public void AddResource(Resource resource)
+        {
+            Prop existing = resourceList.Find(p => p.Name == resource.Name);
+
+            if (existing == null || existing.Amount >= 64)
+            {
+                //새로 만들어서 추가
+                resourceList.Add((Resource)resource.CloneWithAmount(1));
+            }
+            else
+            {
+                existing.Amount += 1;
+            }
+        }
     }
 }
 

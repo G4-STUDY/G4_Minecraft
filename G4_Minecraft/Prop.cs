@@ -1,17 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace G4_WPF_PROJECT
 {
-    public class Prop
+    public class Prop : INotifyPropertyChanged
     {
         private string name;
         private int price;
         private int amount;
         private string imgsource;
+
+        public event PropertyChangedEventHandler? PropertyChanged;
+        protected void OnPropertyChanged(string name)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+        }
+
+
         public string Name
         {
             get { return name; }
@@ -25,7 +34,11 @@ namespace G4_WPF_PROJECT
         public int Amount
         {
             get { return amount; }
-            set { amount = value; }
+            set 
+            { 
+                amount = value;
+                OnPropertyChanged(nameof(Amount));
+            }
         }
         public string Imgsource
         {
@@ -40,6 +53,10 @@ namespace G4_WPF_PROJECT
             this.imgsource = imgsource;
         }
 
+        public virtual Prop CloneWithAmount(int amount)
+        {
+            return new Prop(Name, Price, amount, Imgsource);
+        }
     }
 
     public class Resource : Prop
@@ -49,6 +66,10 @@ namespace G4_WPF_PROJECT
             
         }
         //??
+        public override Prop CloneWithAmount(int amount)
+        {
+            return new Resource(Name, Price, amount, Imgsource);
+        }
     }
     public class Equipment : Prop
     {
@@ -72,6 +93,10 @@ namespace G4_WPF_PROJECT
         //구매
         //착용
         //공격력
+        public override Prop CloneWithAmount(int amount)
+        {
+            return new Equipment(Name, Price, amount, Imgsource, Force, Damage);
+        }
     }
     public class Food : Prop
     {
@@ -81,10 +106,15 @@ namespace G4_WPF_PROJECT
             get { return healnum; }
             set { healnum = value; }
         }
-        public Food(string name, int price, int amount, string imgsource) : base(name, price, amount, imgsource)
+        public Food(string name, int price, int amount, string imgsource, int healnum) : base(name, price, amount, imgsource)
         {
+            this.healnum = healnum;
             //음식 먹기
         }
         //??
+        public override Prop CloneWithAmount(int amount)
+        {
+            return new Food(Name, Price, amount, Imgsource, Healnum);
+        }
     }
 }

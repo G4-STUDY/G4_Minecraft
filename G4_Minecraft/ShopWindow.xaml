@@ -9,11 +9,13 @@
       Title="ShopWindow">
 
     <Grid>
-        <DataGrid x:Name="prodlist"
+        <DataGrid x:Name="equipmentList"
               AutoGenerateColumns="False"
               Width="700"
-              Margin="50,42,50,144"
-              Background="Transparent">
+              Margin="50,19,50,307"
+              Background="Transparent"
+              ScrollViewer.VerticalScrollBarVisibility="Auto"
+              ScrollViewer.HorizontalScrollBarVisibility="Auto">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="name" Binding="{Binding Name}" />
                 <DataGridTextColumn Header="price" Binding="{Binding Price}" />
@@ -27,10 +29,51 @@
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
-        <Button x:Name="buy" Content="사기" HorizontalAlignment="Left" Height="36" Margin="181,339,0,0" VerticalAlignment="Top" Width="179" Click="Buy_Click"/>
-        <Button x:Name="sell" Content="팔기" HorizontalAlignment="Left" Height="36" Margin="443,339,0,0" VerticalAlignment="Top" Width="179"/>
+        <DataGrid x:Name="foodList"
+              AutoGenerateColumns="False"
+              Width="700"
+              Margin="50,263,50,77"
+              Background="Transparent"
+              ScrollViewer.VerticalScrollBarVisibility="Auto"
+              ScrollViewer.HorizontalScrollBarVisibility="Auto">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="name" Binding="{Binding Name}" />
+                <DataGridTextColumn Header="price" Binding="{Binding Price}" />
+                <DataGridTextColumn Header="amount" Binding="{Binding Amount}" />
+                <DataGridTemplateColumn Header="Image" Width="100" IsReadOnly="True">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Image Source="{Binding Imgsource}" Width="60" Height="60"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <DataGrid x:Name="inventoryList"
+              AutoGenerateColumns="False"
+              Width="700"
+              Margin="50,148,50,192"
+              Background="Transparent"
+              ScrollViewer.VerticalScrollBarVisibility="Auto"
+              ScrollViewer.HorizontalScrollBarVisibility="Auto">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="name" Binding="{Binding Name}" />
+                <DataGridTextColumn Header="price" Binding="{Binding Price}" />
+                <DataGridTextColumn Header="amount" Binding="{Binding Amount}" />
+                <DataGridTemplateColumn Header="Image" Width="100" IsReadOnly="True">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Image Source="{Binding Imgsource}" Width="60" Height="60"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button x:Name="buy" Content="사기" HorizontalAlignment="Left" Height="36" Margin="133,406,0,0" VerticalAlignment="Top" Width="179" Click="Buy_Click"/>
+        <Button x:Name="sell" Content="팔기" HorizontalAlignment="Left" Height="36" Margin="492,401,0,0" VerticalAlignment="Top" Width="179" Click="sell_Click"/>
         <TextBlock x:Name="money" HorizontalAlignment="Left" Margin="630,19,0,0" TextWrapping="Wrap" Text="{Binding Money}" VerticalAlignment="Top" Width="120"/>
-        <Button Content="mypage" HorizontalAlignment="Center" Height="22" Margin="0,405,0,0" VerticalAlignment="Top" Width="130" Click="MyPage_Click"/>
+        <Button Content="mypage" HorizontalAlignment="Center" Height="22" Margin="0,418,0,0" VerticalAlignment="Top" Width="130" Click="MyPage_Click"/>
+
 
     </Grid>
 </Page>

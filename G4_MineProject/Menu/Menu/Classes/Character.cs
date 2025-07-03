@@ -46,16 +46,47 @@ namespace Menu.Classes
             return shop.Sell(prop, this);
         }
 
+        // 인벤토리에 추가
         public void AddProp(Prop prop)
         {
-            //Prop existing = inventory.Find(p => p.Name == prop.Name);
+            Prop existing = inventory.Find(p => p.Name == prop.Name);
 
-            //if(existing == null && existing.Amount >= 64)
-            //{
-            //    //새로 만들어서 추가
-            //}
-
-            inventory.Add(prop);
+            if (existing == null || existing.Amount >= 64)
+            {
+                //새로 만들어서 추가
+                inventory.Add(prop.CloneWithAmount(1));
+            }
+            else
+            {
+                existing.Amount += 1;
+            }
         }
+
+        // 자원 판매
+        public bool SellResource(Resource resource, Shop shop)
+        {
+            if (resource.Amount < 1) return false;
+
+            resource.Amount -= 1;
+            Money += resource.Price;
+            shop.AddResource(resource);
+            return true;
+        }
+
+        // 인벤토리에서 제거
+        public void RemoveProp(Prop prop)
+        {
+            Prop existing = inventory.Find(p => p.Name == prop.Name);
+
+            if (existing.Amount == 1)
+            {
+                Inventory.Remove(existing);
+            }
+            else
+            {
+                existing.Amount -= 1;
+            }
+        }
+
     }
 }
