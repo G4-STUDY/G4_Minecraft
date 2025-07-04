@@ -53,7 +53,7 @@
 
   <ItemGroup>
     <Resource Include="Images\equiptment\boat.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Images\equiptment\pickaxe4.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
