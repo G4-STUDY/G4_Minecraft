@@ -46,6 +46,14 @@ namespace Status
             writer = new StreamWriter(stream);
             reader = new StreamReader(stream);
         }
+
+        public void Charactor_refresh(Character c)
+        {
+            MainWindow.character.Hp = c.Hp;
+            MainWindow.character.Health = c.Health;
+            MainWindow.character.Attack = c.Attack;
+            MainWindow.character.Money = c.Money;
+        }
         public void run()
         {
             string msg;
@@ -86,9 +94,17 @@ namespace Status
                 }
                 else if(type == "charactor")
                 {
-                    Character chac = root["Data"].ToObject<Character>();
-                    //캐릭터 갱신 메소드
-                    break;
+                    string act = root["Act"]?.ToString();
+                    if (act == "1")
+                    {   //get메서드
+                        SendCharacter(MainWindow.character,2);
+                    }
+                    else
+                    {
+                        Character chac = root["Data"].ToObject<Character>();
+                        Charactor_refresh(chac);
+                    }
+                        //캐릭터 갱신 메소드
                 }
 
 
@@ -109,7 +125,7 @@ namespace Status
                 MainWindow.servers.Remove(this);
             }
         }
-        public void SendProp(Prop p)
+        public void SendProp(Prop p,int act)//act 1 구매해서 보내는거 2. 자원캐서 보내는거
         {
             var wrapper = new
             {
@@ -122,9 +138,15 @@ namespace Status
             stream.Write(data, 0, data.Length);
         }
 
-        public void SendCharactor(Character c)
+        public void SendCharacter(Character c, int act) //act 1 구매해서 보내는거 2. 자원캐서 보내는거
         {
-            string json = JsonConvert.SerializeObject(c);
+            var wrapper = new 
+            {
+                Type = "Character",
+                Act = act,
+                Data = c  // 기존 객체 p 포함
+            };
+            string json = JsonConvert.SerializeObject(wrapper);
             byte[] data = Encoding.UTF8.GetBytes(json);
             stream.Write(data, 0, data.Length);
         }
@@ -138,7 +160,7 @@ namespace Status
 
     public partial class MainWindow : Window
     {
-        private Character character;
+        public static Character character;
         public static MainWindow curwindow;
         public static List<CServer> servers = new List<CServer>();
         private TcpClient client;
@@ -209,7 +231,6 @@ namespace Status
                 TcpListener listener = new TcpListener(addr, 1234);
                 listener.Start();
                 MessageBox.Show("서버실행");
-
                 while (true)
                 {
                     TcpClient client = listener.AcceptTcpClient();

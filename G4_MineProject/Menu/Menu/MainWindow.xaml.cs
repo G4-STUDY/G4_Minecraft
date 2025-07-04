@@ -1,6 +1,7 @@
 ﻿using Menu.Classes;
 using Menu.Pages;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.IO;
 using System.Net;
@@ -63,6 +64,13 @@ namespace Menu
             }
             return myIP;
         }
+        public void Charactor_refresh(Character c)
+        {
+            MyCharacter.Hp = c.Hp;
+            MyCharacter.Health = c.Health;
+            MyCharacter.Attack = c.Attack;
+            MyCharacter.Money = c.Money;
+        }
         protected override void OnInitialized(EventArgs e)
         {
             base.OnInitialized(e);
@@ -83,38 +91,76 @@ namespace Menu
 
         public void readMsg()
         {
-            string json, str;
+            string msg;
+            bool flag = true;
             byte[] buffer = new byte[1024];
             int bytesRead;
-            while (true)
+            string json;
+            while (flag)
             {
                 bytesRead = stream.Read(buffer, 0, buffer.Length);
                 json = Encoding.UTF8.GetString(buffer, 0, bytesRead);
-                Prop received = JsonConvert.DeserializeObject<Prop>(json);
-                str = received.ToString();
-                if (str.StartsWith("/stop"))
+                JObject root = JObject.Parse(json);
+                string type = root["Type"]?.ToString();
+                if (type == "Prop")
                 {
-                    break;
-                }
-                //백그라운드 작업에서 ui에 직접 접근 불가
-                //Current.Dispatcher 객체를 통해 ui에 접근
-                Application.Current.Dispatcher.Invoke(() =>
-                {
-                    //if (curpage is MainPage)
-                    //    page1.body.Text += str + "\n";
-                    //if (curpage is Page1)
-                    //    page1.body.Text += str + "\n";
-                    //if (curpage is Page2)
-                    //    page1.body.Text += str + "\n";
-                });
+                    Prop received = root["Data"].ToObject<Prop>();
+                    string act = root["Act"]?.ToString();
 
+                    switch (act)
+                    {
+                        case "1":
+                            // 상점에다 자원파는경우
+                            MyCharacter.Money += received.Price;
+                            SendCharacter(MyCharacter, 2);//act 2는 갱신요청
+                            break;
+                        case "2":
+                            // 
+                            break;
+
+                    }
+                }
+                else if (type == "charactor")
+                {
+                    string act = root["Act"]?.ToString();
+                    if (act == "1")
+                    {   
+                        //??
+                    }
+                    else //내캐릭터 갱신해줘
+                    {
+                        Character chac = root["Data"].ToObject<Character>();
+                        Charactor_refresh(chac);
+                        //캐릭터 갱신 메소드
+                    }
+                }
             }
-            client.Close();
+                client.Close();
         }
 
-        public void SendProp(Prop p)
+        public void SendProp(Prop p, int act)//act 1 구매해서 보내는거 2. 자원캐서 보내는거
         {
-            string json = JsonConvert.SerializeObject(p);
+            var wrapper = new
+            {
+                Type = "Prop",
+                Act = "1",//1이면 buy 2면 획득 바꿔서 사용
+                Data = p
+            };
+            string json = JsonConvert.SerializeObject(wrapper);
+            byte[] data = Encoding.UTF8.GetBytes(json);
+            stream.Write(data, 0, data.Length);
+        }
+
+
+        public void SendCharacter(Character c, int act) //act 1.캐릭터정보 보내주세요 2. 캐릭터 갱신요청
+        {
+            var wrapper = new
+            {
+                Type = "Character",
+                Act = act,
+                Data = c  // 기존 객체 p 포함
+            };
+            string json = JsonConvert.SerializeObject(wrapper);
             byte[] data = Encoding.UTF8.GetBytes(json);
             stream.Write(data, 0, data.Length);
         }
