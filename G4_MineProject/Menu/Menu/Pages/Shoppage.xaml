@@ -9,8 +9,47 @@
       Title="Shoppage">
     <StackPanel Orientation="Vertical">
         <TextBox FontSize="20" x:Name="title" TextWrapping="Wrap" Text="여기는 상점" Width="795" Height="42"/>
-        <TextBlock FontSize="20" x:Name="body" TextWrapping="Wrap" Text="" Height="246" Width="797"/>
-        <TextBox FontSize="20" x:Name="input" TextWrapping="Wrap" Text="" Width="795" Height="42"/>
+        <DataGrid x:Name="equipmentList"
+              AutoGenerateColumns="False"
+              Width="700"
+              Background="Transparent"
+              ScrollViewer.VerticalScrollBarVisibility="Auto"
+              ScrollViewer.HorizontalScrollBarVisibility="Auto" Height="147">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="name" Binding="{Binding Name}" />
+                <DataGridTextColumn Header="price" Binding="{Binding Price}" />
+                <DataGridTextColumn Header="amount" Binding="{Binding Amount}" />
+                <DataGridTemplateColumn Header="Image" Width="100" IsReadOnly="True">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Image Source="{Binding Imgsource}" Width="60" Height="60"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <DataGrid x:Name="foodList"
+              AutoGenerateColumns="False"
+              Width="700"
+              Background="Transparent"
+              ScrollViewer.VerticalScrollBarVisibility="Auto"
+              ScrollViewer.HorizontalScrollBarVisibility="Auto" Height="148">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="name" Binding="{Binding Name}" />
+                <DataGridTextColumn Header="price" Binding="{Binding Price}" />
+                <DataGridTextColumn Header="amount" Binding="{Binding Amount}" />
+                <DataGridTemplateColumn Header="Image" Width="100" IsReadOnly="True">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Image Source="{Binding Imgsource}" Width="60" Height="60"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button x:Name="buy" Content="사기" HorizontalAlignment="Center" Height="36" Click="Buy_Click"/>
+        <Button x:Name="sell" Content="팔기" HorizontalAlignment="Center" Height="36" Click="sell_Click"/>
         <Button FontSize="20" Content="메뉴로" Height="48" Click="Button_Click"/>
+        <TextBlock x:Name="money" HorizontalAlignment= "Center" />
     </StackPanel>
 </Page>

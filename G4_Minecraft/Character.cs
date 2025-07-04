@@ -88,5 +88,28 @@ namespace G4_WPF_PROJECT
             }
         }
 
+        public void useProp(Prop prop)
+        {
+            if(prop is Resource)
+            {
+                MessageBox.Show("자원 착용 불가");
+                return;
+            }
+
+            if(prop is Food)
+            {
+                Food food = (Food)prop;
+                Hp += food.Healnum;
+            }
+            else if(prop is Equipment)
+            {
+                Equipment equipment = (Equipment)prop;
+                attack = equipment.Force;
+                //hp 적게 주는 것 반영 필요
+            }
+            
+            RemoveProp(prop);
+        }
+
     }
 }
