@@ -13,7 +13,6 @@ namespace Menu.Classes
         private int price;
         private int amount;
         private string imgsource;
-
         public event PropertyChangedEventHandler? PropertyChanged;
         protected void OnPropertyChanged(string name)
         {

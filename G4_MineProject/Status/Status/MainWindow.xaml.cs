@@ -1,4 +1,9 @@
-﻿using System.IO;
+﻿using Menu;
+using Menu.Classes;
+using Menu.Pages;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System.IO;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
@@ -11,10 +16,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Menu;
-using Menu.Classes;
-using Menu.Pages;
-using Newtonsoft.Json;
 
 namespace Status
 {
@@ -57,26 +58,49 @@ namespace Status
             {
                 bytesRead = stream.Read(buffer, 0, buffer.Length);
                 json = Encoding.UTF8.GetString(buffer, 0, bytesRead);
-
-                Prop received = JsonConvert.DeserializeObject<Prop>(json);
-                msg = received.ToString();
-
-
-
-                if (msg.StartsWith("/stop"))
+                JObject root = JObject.Parse(json);
+                string type = root["Type"]?.ToString();
+                if (type == "Prop")
                 {
-                    write(msg);//클라이언트의 서버메시지 받는 쓰레드의 종료값으로 전달
-                    msg = " 님이 퇴장하셨습니다.";
-                    flag = false;
-                }
-                MainWindow.curwindow.writetext(msg); //
-                lock (MainWindow.servers)
-                {
-                    foreach (CServer cServer in MainWindow.servers)
+                    Prop received = root["Data"].ToObject<Prop>();
+                    string act = root["Act"]?.ToString();
+
+                    switch (act)
                     {
-                        cServer.SendProp(received);
+                        case "1":
+                            // Prop 구매 처리 로직
+                            /*
+                                chac.money-=recevie.price
+                                //돈이없을때 예외처리
+                                chac.inventory.add(receive);
+                             */
+                            break;
+                        case "2":
+                            // Prop 획득 처리 로직
+                            /*
+                               chac.inventory.add(receive);
+                             */
+                            break;
+
                     }
                 }
+                else if(type == "charactor")
+                {
+                    Character chac = root["Data"].ToObject<Character>();
+                    //캐릭터 갱신 메소드
+                    break;
+                }
+
+
+                ////MainWindow.curwindow.writetext(msg); //
+                //lock (MainWindow.servers) 
+                //{  
+                //    foreach (CServer cServer in MainWindow.servers)
+                //    {   //클라이언트에 보낼작업하기
+                //        //보낼게있나..?
+                //        cServer.SendProp(received);
+                //    }
+                //}
 
             }
             client.Close();
@@ -87,10 +111,24 @@ namespace Status
         }
         public void SendProp(Prop p)
         {
-            string json = JsonConvert.SerializeObject(p);
+            var wrapper = new
+            {
+                Type = "Prop",
+                Act = "1",//1이면 buy 2면 획득 바꿔서 사용
+                Data = p
+            };
+            string json = JsonConvert.SerializeObject(wrapper);
             byte[] data = Encoding.UTF8.GetBytes(json);
             stream.Write(data, 0, data.Length);
         }
+
+        public void SendCharactor(Character c)
+        {
+            string json = JsonConvert.SerializeObject(c);
+            byte[] data = Encoding.UTF8.GetBytes(json);
+            stream.Write(data, 0, data.Length);
+        }
+
         public void write(string msg)
         {
             writer.WriteLine(msg);
@@ -100,6 +138,7 @@ namespace Status
 
     public partial class MainWindow : Window
     {
+        private Character character;
         public static MainWindow curwindow;
         public static List<CServer> servers = new List<CServer>();
         private TcpClient client;
@@ -109,24 +148,25 @@ namespace Status
 
         //MJ
         private List<Prop> Inventory = new List<Prop>();
+        //private List<Prop> Equipped = new List<Prop>();
         private int? sourceRow = null;
         private int? sourceCol = null;
         //~Mj
         public MainWindow()
         {
             InitializeComponent();
+            character = new Character();
             inventory.SelectionUnit = DataGridSelectionUnit.Cell;
             inventory.CurrentCellChanged += inventory_CurrentCellChanged;
-            // 열 정의
             for (int i = 0; i < 10; i++)
             {
                 inventory.Columns.Add(new DataGridTextColumn
                 {
                     Binding = new Binding($"P{i + 1}.Name"), // Product 객체의 Name 속성만 표시
-                    Width = 50
+                    Width = 5
                 });
             }
-            inventory.RowHeight = 60;
+            inventory.RowHeight = 5;
 
             var rowDataList = new List<RowData>();
             for (int i = 0; i < 3; i++)
@@ -134,6 +174,28 @@ namespace Status
                 rowDataList.Add(new RowData());
             }
             inventory.ItemsSource = rowDataList;
+
+            /*
+            Equipped_Grid.SelectionUnit = DataGridSelectionUnit.Cell;
+            Equipped_Grid.CurrentCellChanged += Equipped_Grid_CurrentCellChanged;
+
+            for (int i = 0; i < 10; i++)
+            {
+                Equipped_Grid.Columns.Add(new DataGridTextColumn
+                {
+                    Binding = new Binding($"P{i + 1}.Name"), // Product 객체의 Name 속성만 표시
+                    Width = 50
+                });
+            }
+            Equipped_Grid.RowHeight = 60;
+
+            var rowDataList = new List<RowData>();
+            for (int i = 0; i < 3; i++)
+            {
+                rowDataList.Add(new RowData());
+            }
+            Equipped_Grid.ItemsSource = rowDataList;
+            */
         }
 
         protected override void OnInitialized(EventArgs e)
@@ -179,14 +241,6 @@ namespace Status
                 //body.Text += str + "\n";
             });
 
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-        }
-
-        private void Button_Click_1(object sender, RoutedEventArgs e)
-        {
         }
 
         //MJ

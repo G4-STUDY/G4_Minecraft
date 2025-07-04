@@ -12,6 +12,7 @@ namespace Menu.Classes
     public class Character
     {
         private int hp;
+        private int health;
         private int attack;
         private int money = 50000;
         private List<Prop> inventory = new();
@@ -20,6 +21,11 @@ namespace Menu.Classes
         {
             get { return hp; }
             set { hp = value; }
+        }
+        public int Health
+        {
+            get { return health; }
+            set { health = value; }
         }
         public int Attack
         {
@@ -92,6 +98,16 @@ namespace Menu.Classes
                 existing.Amount -= 1;
             }
         }
+        public Character()
+        {
+            hp = 100;
+            health = 10;
+            attack = 10;
+            money = 5000;
+
+        }
+    }
+}
         
         // 음식 먹기
         public void EatFood(Food food)
