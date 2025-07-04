@@ -31,11 +31,8 @@
     <None Remove="Images\food\melonSlice.png" />
     <None Remove="Images\food\Potato.png" />
     <None Remove="Images\food\salmon.png" />
-    <None Remove="Images\ForestImage.jpg" />
     <None Remove="Images\MenuImage.jpg" />
-    <None Remove="Images\MineImage.png" />
     <None Remove="Images\shopImage.jpg" />
-    <None Remove="Images\WorkPlaceImage.jpg" />
   </ItemGroup>
 
   <ItemGroup>
@@ -112,19 +109,10 @@
     <Resource Include="Images\food\salmon.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Images\ForestImage.jpg">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Resource>
     <Resource Include="Images\MenuImage.jpg">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Images\MineImage.png">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Resource>
     <Resource Include="Images\shopImage.jpg">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Images\WorkPlaceImage.jpg">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Pages\ForestImage.jpg">
