@@ -271,12 +271,12 @@ namespace Status
         {
             Dispatcher.Invoke(() =>
             {
-                Inventory.Add(newProp);
+                Inventory.Add(newProp.CloneWithAmount(1));
                 int index = Inventory.Count - 1; 
                 int row = index / 10;
                 int col = index % 10;
                 RowData rowData = ((List<RowData>)inventory.ItemsSource)[row];
-                typeof(RowData).GetProperty($"P{col + 1}")?.SetValue(rowData, newProp);
+                typeof(RowData).GetProperty($"P{col + 1}")?.SetValue(rowData, newProp.CloneWithAmount(1));
                 inventory.Items.Refresh();
             });
 
