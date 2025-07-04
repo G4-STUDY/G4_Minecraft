@@ -185,10 +185,10 @@ namespace Status
                 inventory.Columns.Add(new DataGridTextColumn
                 {
                     Binding = new Binding($"P{i + 1}.Name"), // Product 객체의 Name 속성만 표시
-                    Width = 5
+                    Width = 50
                 });
             }
-            inventory.RowHeight = 5;
+            inventory.RowHeight = 50;
 
             var rowDataList = new List<RowData>();
             for (int i = 0; i < 3; i++)
@@ -197,27 +197,26 @@ namespace Status
             }
             inventory.ItemsSource = rowDataList;
 
-            /*
+            
             Equipped_Grid.SelectionUnit = DataGridSelectionUnit.Cell;
             Equipped_Grid.CurrentCellChanged += Equipped_Grid_CurrentCellChanged;
 
-            for (int i = 0; i < 10; i++)
-            {
-                Equipped_Grid.Columns.Add(new DataGridTextColumn
-                {
-                    Binding = new Binding($"P{i + 1}.Name"), // Product 객체의 Name 속성만 표시
-                    Width = 50
-                });
-            }
-            Equipped_Grid.RowHeight = 60;
 
-            var rowDataList = new List<RowData>();
-            for (int i = 0; i < 3; i++)
+            Equipped_Grid.Columns.Add(new DataGridTextColumn
             {
-                rowDataList.Add(new RowData());
+                Binding = new Binding($"P{1}.Name"), // Product 객체의 Name 속성만 표시
+                Width = 40
+            });
+
+            Equipped_Grid.RowHeight = 40;
+
+            var rowDataList1 = new List<RowData>();
+            for (int i = 0; i < 4; i++)
+            {
+                rowDataList1.Add(new RowData());
             }
-            Equipped_Grid.ItemsSource = rowDataList;
-            */
+            Equipped_Grid.ItemsSource = rowDataList1;
+            
         }
 
         protected override void OnInitialized(EventArgs e)
