@@ -9,6 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Images\equiptment\boat.png" />
     <None Remove="Images\equiptment\boots.png" />
     <None Remove="Images\equiptment\helmet.png" />
     <None Remove="Images\equiptment\helmet2.png" />
@@ -19,6 +20,7 @@
     <None Remove="Images\equiptment\pickaxe5.png" />
     <None Remove="Images\equiptment\trousers.png" />
     <None Remove="Images\equiptment\tunic.png" />
+    <None Remove="Images\escape.jpg" />
     <None Remove="Images\ex1.jpg" />
     <None Remove="Images\ex2.jpg" />
     <None Remove="Images\food\apple.png" />
@@ -50,6 +52,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Images\equiptment\boat.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Images\equiptment\pickaxe4.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
@@ -87,6 +92,7 @@
     <Resource Include="Images\equiptment\tunic.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Images\escape.jpg" />
     <Resource Include="Images\ex1.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>

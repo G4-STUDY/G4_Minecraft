@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace Menu.Classes
 {
@@ -42,6 +43,17 @@ namespace Menu.Classes
         public bool Sell(Prop prop, Character character)
         {
             if (!CanSell(prop, character)) return false;
+
+            if(prop.Name == "탈출 보트")
+            {
+                MessageBox.Show("탈출 ~");
+                var mainWindow = System.Windows.Application.Current.MainWindow as Menu.MainWindow;
+                if (mainWindow != null)
+                {
+                    mainWindow.MainFrame.Navigate(new Menu.Pages.EscapePage());
+                }
+                return true;
+            }
 
             prop.Amount -= 1;
             character.Money -= prop.Price;

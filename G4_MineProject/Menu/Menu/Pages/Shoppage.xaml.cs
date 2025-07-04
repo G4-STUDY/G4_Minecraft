@@ -102,6 +102,8 @@ namespace Menu.Pages
             shop.EquipmentList.Add(new Equipment("철 곡괭이", 3000, 1, "\\Images\\equiptment\\pickaxe3.png", 30, 30));
             shop.EquipmentList.Add(new Equipment("금 곡갱이", 5000, 1, "\\Images\\equiptment\\pickaxe4.png", 50, 20));
             shop.EquipmentList.Add(new Equipment("다이아 곡괭이", 8000, 1, "\\Images\\equiptment\\pickaxe5.png", 80, 5));
+            shop.EquipmentList.Add(new Equipment("탈출 보트", 1000000, 1, "\\Images\\equiptment\\boat", 0, 0));
+
 
             //음식 추가
             shop.FoodList.Add(new Food("사과", 1000, 5, "\\Images\\food\\apple.png", 10));
