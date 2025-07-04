@@ -18,6 +18,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Status
 {
@@ -84,7 +85,7 @@ namespace Status
                             MainWindow.curwindow.AddProp_Inventory(received);
                             break;
                         case "2":
-                    
+
                             MainWindow.curwindow.AddProp_Inventory(received);
                             // Prop 획득 처리 로직
 
@@ -92,19 +93,19 @@ namespace Status
 
                     }
                 }
-                else if(type == "charactor")
+                else if (type == "charactor")
                 {
                     string act = root["Act"]?.ToString();
                     if (act == "1")
                     {   //get메서드
-                        SendCharacter(MainWindow.character,2);
+                        SendCharacter(MainWindow.character, 2);
                     }
                     else
                     {
                         Character chac = root["Data"].ToObject<Character>();
                         Charactor_refresh(chac);
                     }
-                        //캐릭터 갱신 메소드
+                    //캐릭터 갱신 메소드
                 }
 
 
@@ -125,7 +126,7 @@ namespace Status
                 MainWindow.servers.Remove(this);
             }
         }
-        public void SendProp(Prop p,int act)//act 1 구매해서 보내는거 2. 자원캐서 보내는거
+        public void SendProp(Prop p, int act)//act 1 구매해서 보내는거 2. 자원캐서 보내는거
         {
             var wrapper = new
             {
@@ -140,7 +141,7 @@ namespace Status
 
         public void SendCharacter(Character c, int act) //act 1 구매해서 보내는거 2. 자원캐서 보내는거
         {
-            var wrapper = new 
+            var wrapper = new
             {
                 Type = "charactor",
                 Act = act,
@@ -160,7 +161,7 @@ namespace Status
 
     public partial class MainWindow : Window
     {
-       
+        public static int curidx;
         public static Character character;
         public static MainWindow curwindow;
         public static List<CServer> servers = new List<CServer>();
@@ -199,7 +200,7 @@ namespace Status
             }
             inventory.ItemsSource = rowDataList;
 
-            
+
             Equipped_Grid.SelectionUnit = DataGridSelectionUnit.Cell;
             Equipped_Grid.CurrentCellChanged += Equipped_Grid_CurrentCellChanged;
 
@@ -218,7 +219,7 @@ namespace Status
                 rowDataList1.Add(new RowData());
             }
             Equipped_Grid.ItemsSource = rowDataList1;
-            
+
         }
 
         protected override void OnInitialized(EventArgs e)
@@ -271,7 +272,7 @@ namespace Status
             Dispatcher.Invoke(() =>
             {
                 Inventory.Add(newProp);
-                int index = Inventory.Count - 1;
+                int index = Inventory.Count - 1; 
                 int row = index / 10;
                 int col = index % 10;
 
@@ -280,9 +281,17 @@ namespace Status
 
                 inventory.Items.Refresh();
             });
-            
+
         }
 
+        public void Remove_Inventory(int idx)
+        {
+
+            int row = idx / 10;
+            int col = idx % 10;
+            RowData rowData = ((List<RowData>)inventory.ItemsSource)[row];
+            typeof(RowData).GetProperty($"P{col + 1}")?.SetValue(rowData, null);
+        }
         private void Button_Click_Save(object sender, RoutedEventArgs e)
         {
             if (Inventory.Count >= 30)
@@ -342,7 +351,13 @@ namespace Status
             damagev.Text = "";
             healthv.Text = "";
         }
-
+        public void swap(Prop x, Prop y)
+        {
+            Prop tmp = x;
+            x = y;
+            y = tmp;
+            return;
+        }
         private void inventory_CurrentCellChanged(object sender, EventArgs e)
         {
             var dg = (DataGrid)sender;
@@ -351,45 +366,46 @@ namespace Status
 
             int currentCol = dg.CurrentCell.Column.DisplayIndex;
             int currentRow = dg.Items.IndexOf(dg.CurrentCell.Item);
-
+            curidx = (currentRow) * 10 + currentCol;
             var rowList = (List<RowData>)inventory.ItemsSource;
             RowData currentRowData = rowList[currentRow];
             Prop currentProp = (Prop)typeof(RowData).GetProperty($"P{currentCol + 1}")?.GetValue(currentRowData);
 
-            // 이전 셀과 현재 셀이 다르면 이동/교환 시도
-            if (sourceRow != null && sourceCol != null && (sourceRow != currentRow || sourceCol != currentCol))
-            {
-                RowData sourceRowData = rowList[sourceRow.Value];
-                Prop sourceProp = (Prop)typeof(RowData).GetProperty($"P{sourceCol.Value + 1}")?.GetValue(sourceRowData);
+            //// 이전 셀과 현재 셀이 다르면 이동/교환 시도
+            //if (sourceRow != null && sourceCol != null && (sourceRow != currentRow || sourceCol != currentCol))
+            //{
+            //    RowData sourceRowData = rowList[sourceRow.Value];
+            //    Prop sourceProp = (Prop)typeof(RowData).GetProperty($"P{sourceCol.Value + 1}")?.GetValue(sourceRowData);
 
-                if (sourceProp != null)
-                {
-                    if (currentProp == null)
-                    {
-                        // 빈 셀: 이동
-                        typeof(RowData).GetProperty($"P{currentCol + 1}")?.SetValue(currentRowData, sourceProp);
-                        typeof(RowData).GetProperty($"P{sourceCol.Value + 1}")?.SetValue(sourceRowData, null);
-                    }
-                    else
-                    {
-                        // 데이터가 있는 셀: 교환
-                        typeof(RowData).GetProperty($"P{currentCol + 1}")?.SetValue(currentRowData, sourceProp);
-                        typeof(RowData).GetProperty($"P{sourceCol.Value + 1}")?.SetValue(sourceRowData, currentProp);
-                    }
+            //    if (sourceProp != null)
+            //    {
+            //        if (currentProp == null)
+            //        {
+            //            //// 빈 셀: 이동
+            //            //typeof(RowData).GetProperty($"P{currentCol + 1}")?.SetValue(currentRowData, sourceProp);
+            //            //typeof(RowData).GetProperty($"P{sourceCol.Value + 1}")?.SetValue(sourceRowData, null);
+            //        }
+            //        else
+            //        {
+            //            // 데이터가 있는 셀: 교환
+            //            typeof(RowData).GetProperty($"P{currentCol + 1}")?.SetValue(currentRowData, sourceProp);
+            //            typeof(RowData).GetProperty($"P{sourceCol.Value + 1}")?.SetValue(sourceRowData, currentProp);
+            //            swap(Inventory[currentRow], Inventory[currentRow]);
+            //        }
 
-                    // DataGrid 새로고침
-                    inventory.Items.Refresh();
-                    Namev.Text = "";
-                    Pricev.Text = "";
-                    Amountv.Text = "";
-                    Forcev.Text = "";
-                    Damagev.Text = "";
-                    Healthv.Text = "";
-                    sourceRow = null;
-                    sourceCol = null;
-                    return;
-                }
-            }
+            //        // DataGrid 새로고침
+            //        inventory.Items.Refresh();
+            //        Namev.Text = "";
+            //        Pricev.Text = "";
+            //        Amountv.Text = "";
+            //        Forcev.Text = "";
+            //        Damagev.Text = "";
+            //        Healthv.Text = "";
+            //        sourceRow = null;
+            //        sourceCol = null;
+            //        return;
+            //    }
+            //}
 
             // 현재 클릭한 셀의 Product 표시
             if (currentProp != null)
@@ -441,6 +457,7 @@ namespace Status
             Equipped.Add(newProp);
 
             var rowList = (List<RowData>)Equipped_Grid.ItemsSource;
+            int testidx = 0;
             foreach (var row in rowList)
             {
                 var existing = (Prop)typeof(RowData).GetProperty("P1")?.GetValue(row);
@@ -455,19 +472,18 @@ namespace Status
         }
         private void Equip_Button_Click(object sender, RoutedEventArgs e)
         {
-            Prop newProp = (Prop)inventory.SelectedItem;
-            //string name = Namev.Text;
-            //int price = Int32.Parse(Pricev.Text);
-            //int amount = Int32.Parse(Amountv.Text);
-            //int force = Int32.Parse(Forcev.Text);
-            //int damage = Int32.Parse(Damagev.Text);
-
-            //string imgsource = "a";
-
-            //Equipment newProp = new Equipment(name, price, amount, imgsource, force, damage);
-            //AddProp_Equipped(newProp);
-            UseProp(newProp);
-
+            //Prop newProp = (Prop)inventory.SelectedItem;
+            //MessageBox.Show("확인용12222" + newProp.Name);
+            string name = Namev.Text;
+            int price = Int32.Parse(Pricev.Text);
+            int amount = Int32.Parse(Amountv.Text);
+            string imgsource = "a";
+            if (Forcev.Text != "") { //장착:장비
+                int force = Int32.Parse(Forcev.Text);
+                int damage = Int32.Parse(Damagev.Text);
+                Equipment newProp = new Equipment(name, price, amount, imgsource, force, damage);
+                UseProp(newProp, curidx);
+            }
             Namev.Text = "";
             Pricev.Text = "";
             Amountv.Text = "";
@@ -476,22 +492,16 @@ namespace Status
 
         }
         //~Mj
-        
 
-        public void UseProp(Prop prop)
+
+        public void UseProp(Prop prop, int idx)
         {
-            if (prop is Resource)
-            {
-
-                return;
-            }
-            else if (prop is Equipment)
+            if (prop is Equipment)
             {
                 Equipment equipment = (Equipment)prop;
                 AddProp_Equipped(equipment);
                 character.Attack += equipment.Force;
                 character.Health += equipment.Damage;
-                Inventory.Remove(equipment);
             }
             else if (prop is Food)
             {
@@ -499,28 +509,22 @@ namespace Status
                 character.Hp += food.Healnum;
                 Inventory.Remove(food);
             }
+            Inventory.RemoveAt(idx);
+            Remove_Inventory(idx);
+            inventory.Items.Refresh();
             MainWindow.s.SendCharacter(character, 2);
-            MessageBox.Show("gogo");
             //반대쪽에 알려줘라
-            
+
         }
 
-        public void SellProp(Prop prop)
+        private void Sell_Button_Click(object sender, RoutedEventArgs e)
         {
-            if (prop is Resource)
-            {
-                Resource resource = (Resource)prop;
-                character.Money += resource.Price;
-                Inventory.Remove(resource);
-            }
-            else if (prop is Equipment)
-            {
-                Equipment equipment = (Equipment)prop;
-                character.Money += equipment.Price;
-                Inventory.Remove(equipment);
-            }
-
+            int price = Int32.Parse(Pricev.Text);
+            character.Money += price;
+            Inventory.RemoveAt(curidx);
+            Remove_Inventory(curidx);
+            inventory.Items.Refresh();
+            s.SendCharacter(character, 2);
         }
-
     }
 }

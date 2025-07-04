@@ -134,7 +134,7 @@ namespace Menu
                     {
                         Character chac = root["Data"].ToObject<Character>();
                         Charactor_refresh(chac);
-                        MessageBox.Show("갱신완료");
+                        MessageBox.Show("갱신완료"+MyCharacter.Money);
                         //캐릭터 갱신 메소드
                     }
                 }

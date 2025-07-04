@@ -56,6 +56,7 @@
             SelectionChanged="inventory_CurrentCellChanged">
             </DataGrid>
             <Button Content="장착" HorizontalAlignment="Left" Margin="416,154,0,0" VerticalAlignment="Top" Click="Equip_Button_Click"/>
+            <Button Content="판매" HorizontalAlignment="Left" Margin="416,174,0,0" VerticalAlignment="Top" Click="Sell_Button_Click"/>
             <TextBlock x:Name="money" HorizontalAlignment="Left" Margin="331,47,0,0" TextWrapping="Wrap" Text="돈 : " VerticalAlignment="Top"/>
         </Grid>
         <Grid Height="226" Width="137" VerticalAlignment="Top">
