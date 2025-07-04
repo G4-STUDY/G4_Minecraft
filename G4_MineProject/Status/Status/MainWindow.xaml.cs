@@ -138,7 +138,7 @@ namespace Status
 
     public partial class MainWindow : Window
     {
-        private Character character;
+        private Character character = new();
         public static MainWindow curwindow;
         public static List<CServer> servers = new List<CServer>();
         private TcpClient client;
@@ -147,8 +147,8 @@ namespace Status
         private StreamReader reader;
 
         //MJ
-        private List<Prop> Inventory = new List<Prop>();
-        //private List<Prop> Equipped = new List<Prop>();
+        private List<Prop> Inventory = new();
+        private List<Prop> Equipped = new();
         private int? sourceRow = null;
         private int? sourceCol = null;
         //~Mj
@@ -163,39 +163,36 @@ namespace Status
                 inventory.Columns.Add(new DataGridTextColumn
                 {
                     Binding = new Binding($"P{i + 1}.Name"), // Product 객체의 Name 속성만 표시
-                    Width = 5
-                });
-            }
-            inventory.RowHeight = 5;
-
-            var rowDataList = new List<RowData>();
-            for (int i = 0; i < 3; i++)
-            {
-                rowDataList.Add(new RowData());
-            }
-            inventory.ItemsSource = rowDataList;
-
-            /*
-            Equipped_Grid.SelectionUnit = DataGridSelectionUnit.Cell;
-            Equipped_Grid.CurrentCellChanged += Equipped_Grid_CurrentCellChanged;
-
-            for (int i = 0; i < 10; i++)
-            {
-                Equipped_Grid.Columns.Add(new DataGridTextColumn
-                {
-                    Binding = new Binding($"P{i + 1}.Name"), // Product 객체의 Name 속성만 표시
                     Width = 50
                 });
             }
-            Equipped_Grid.RowHeight = 60;
+            inventory.RowHeight = 60;
 
-            var rowDataList = new List<RowData>();
+            var rowDataList1 = new List<RowData>();
             for (int i = 0; i < 3; i++)
             {
-                rowDataList.Add(new RowData());
+                rowDataList1.Add(new RowData());
             }
-            Equipped_Grid.ItemsSource = rowDataList;
-            */
+            inventory.ItemsSource = rowDataList1;
+
+            
+            Equipped_Grid.SelectionUnit = DataGridSelectionUnit.Cell;
+            Equipped_Grid.CurrentCellChanged += Equipped_Grid_CurrentCellChanged;
+            Equipped_Grid.Columns.Add(new DataGridTextColumn
+            {
+                Binding = new Binding($"P{1}.Name"), // Product 객체의 Name 속성만 표시
+                Width = 50
+            });
+
+            Equipped_Grid.RowHeight = 41;
+
+            var rowDataList2 = new List<RowData>();
+            for (int i = 0; i < 4; i++)
+            {
+                rowDataList2.Add(new RowData());
+            }
+            Equipped_Grid.ItemsSource = rowDataList2;
+            
         }
 
         protected override void OnInitialized(EventArgs e)
@@ -403,6 +400,10 @@ namespace Status
             // 새 기준 셀 설정
             sourceRow = currentRow;
             sourceCol = currentCol;
+        }
+        private void Equipped_Grid_CurrentCellChanged(object sender, EventArgs e)
+        {
+
         }
         //~Mj
     }

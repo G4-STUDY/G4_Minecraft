@@ -37,7 +37,15 @@
             <Button Content="save" Grid.Row="6" Grid.ColumnSpan="2" Click="Button_Click_Save" />
         </Grid>
         <Grid Width="510">
-      
+            <DataGrid 
+            x:Name="Equipped_Grid" 
+            IsReadOnly="True" 
+            SelectionUnit="Cell" 
+            AutoGenerateColumns="False" 
+            CanUserAddRows="False" 
+            Margin="58,0,373,233" 
+            SelectionChanged="Equipped_Grid_CurrentCellChanged">
+            </DataGrid>      
             <DataGrid 
             x:Name="inventory" 
             IsReadOnly="True" 
