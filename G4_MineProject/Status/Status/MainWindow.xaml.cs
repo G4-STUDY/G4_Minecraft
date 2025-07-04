@@ -3,6 +3,7 @@ using Menu.Classes;
 using Menu.Pages;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using System;
 using System.IO;
 using System.Net;
 using System.Net.Sockets;
@@ -58,6 +59,7 @@ namespace Status
             MainWindow.character.Money = c.Money;
             MainWindow.curwindow.Dispatcher.Invoke(() =>
             {
+                MessageBox.Show("돈갱신"+ c.Money.ToString());
                 MainWindow.curwindow.money.Text = c.Money.ToString();
             });
         }
@@ -103,6 +105,7 @@ namespace Status
                     else
                     {
                         Character chac = root["Data"].ToObject<Character>();
+                        MessageBox.Show("뭔데");
                         Charactor_refresh(chac);
                     }
                     //캐릭터 갱신 메소드
@@ -524,6 +527,7 @@ namespace Status
             Inventory.RemoveAt(curidx);
             Remove_Inventory(curidx);
             inventory.Items.Refresh();
+            s.Charactor_refresh(character);
             s.SendCharacter(character, 2);
         }
     }

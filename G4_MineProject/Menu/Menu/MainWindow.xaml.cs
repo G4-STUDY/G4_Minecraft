@@ -90,7 +90,7 @@ namespace Menu
         protected override void OnInitialized(EventArgs e)
         {
             base.OnInitialized(e);
-            //serverinit();
+            serverinit();
 
         }
 
@@ -128,7 +128,6 @@ namespace Menu
                 }
                 else if (type == "charactor")
                 {
-                    MessageBox.Show("갱신완료?????2323");
                     string act = root["Act"]?.ToString();
                     if (act == "1")
                     {   
@@ -138,7 +137,6 @@ namespace Menu
                     {
                         Character chac = root["Data"].ToObject<Character>();
                         Charactor_refresh(chac);
-                        MessageBox.Show("갱신완료"+MyCharacter.Money);
                         //캐릭터 갱신 메소드
                     }
                 }
@@ -174,7 +172,7 @@ namespace Menu
             };
             string json = JsonConvert.SerializeObject(wrapper);
             byte[] data = Encoding.UTF8.GetBytes(json);
-            //stream.Write(data, 0, data.Length);
+            stream.Write(data, 0, data.Length);
         }
 
         public void SwitchPage(Page page)
