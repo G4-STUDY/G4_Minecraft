@@ -83,6 +83,9 @@ namespace Menu.Pages
                     //자원 획득
 
                     //
+                    //
+                    Resource resource = new Resource("돌", 10, ForestMonsters[idx].RewardAmout, "");
+                    MainWindow.mainWindow.SendProp(resource, 2);
                     MessageBox.Show("광물" + ForestMonsters[idx].RewardAmout + "개 획득");
                     //원복
                     Bars[idx].Visibility = Visibility.Collapsed;

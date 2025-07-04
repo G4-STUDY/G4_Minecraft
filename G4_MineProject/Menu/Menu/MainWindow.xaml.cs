@@ -74,18 +74,18 @@ namespace Menu
         protected override void OnInitialized(EventArgs e)
         {
             base.OnInitialized(e);
-            //client = new TcpClient();
-            //string serverIP = GetLocalIP();
-            //client.Connect(serverIP, 1234);
-            //if (client != null)
-            //{
-            //    MessageBox.Show("서버접속완료");
-            //}
-            //stream = client.GetStream();
-            //reader = new StreamReader(stream);
-            //writer = new StreamWriter(stream);
-            //Thread th = new Thread(new ThreadStart(readMsg));
-            //th.Start();
+            client = new TcpClient();
+            string serverIP = GetLocalIP();
+            client.Connect(serverIP, 1234);
+            if (client != null)
+            {
+                MessageBox.Show("서버접속완료");
+            }
+            stream = client.GetStream();
+            reader = new StreamReader(stream);
+            writer = new StreamWriter(stream);
+            Thread th = new Thread(new ThreadStart(readMsg));
+            th.Start();
 
         }
 
@@ -143,7 +143,7 @@ namespace Menu
             var wrapper = new
             {
                 Type = "Prop",
-                Act = "1",//1이면 buy 2면 획득 바꿔서 사용
+                Act = act.ToString(),//1이면 buy 2면 획득 바꿔서 사용
                 Data = p
             };
             string json = JsonConvert.SerializeObject(wrapper);

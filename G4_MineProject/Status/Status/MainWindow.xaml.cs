@@ -16,6 +16,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace Status
 {
@@ -68,11 +69,12 @@ namespace Status
                 json = Encoding.UTF8.GetString(buffer, 0, bytesRead);
                 JObject root = JObject.Parse(json);
                 string type = root["Type"]?.ToString();
+                MessageBox.Show("받기1");
                 if (type == "Prop")
                 {
                     Prop received = root["Data"].ToObject<Prop>();
                     string act = root["Act"]?.ToString();
-
+                    MessageBox.Show("받기2" + act);
                     switch (act)
                     {
                         case "1":
@@ -84,10 +86,12 @@ namespace Status
                              */
                             break;
                         case "2":
+                            MessageBox.Show("받기3");
+                            MessageBox.Show(received.Name+ received.Price+ received.Amount);
+                            
+                            MainWindow.curwindow.AddProp_Inventory(received);
                             // Prop 획득 처리 로직
-                            /*
-                               chac.inventory.add(receive);
-                             */
+
                             break;
 
                     }
@@ -160,6 +164,7 @@ namespace Status
 
     public partial class MainWindow : Window
     {
+       
         public static Character character;
         public static MainWindow curwindow;
         public static List<CServer> servers = new List<CServer>();
@@ -178,6 +183,7 @@ namespace Status
         {
             InitializeComponent();
             character = new Character();
+            curwindow = this;
             inventory.SelectionUnit = DataGridSelectionUnit.Cell;
             inventory.CurrentCellChanged += inventory_CurrentCellChanged;
             for (int i = 0; i < 10; i++)
@@ -264,15 +270,21 @@ namespace Status
         }
 
         //MJ
-        private void AddProp_Inventory(Prop newProp)
+        public void AddProp_Inventory(Prop newProp)
         {
-            Inventory.Add(newProp);
-            int index = Inventory.Count - 1;
-            int row = index / 10;
-            int col = index % 10;
+            Dispatcher.Invoke(() =>
+            {
+                Inventory.Add(newProp);
+                int index = Inventory.Count - 1;
+                int row = index / 10;
+                int col = index % 10;
 
-            RowData rowData = ((List<RowData>)inventory.ItemsSource)[row];
-            typeof(RowData).GetProperty($"P{col + 1}")?.SetValue(rowData, newProp);
+                RowData rowData = ((List<RowData>)inventory.ItemsSource)[row];
+                typeof(RowData).GetProperty($"P{col + 1}")?.SetValue(rowData, newProp);
+
+                inventory.Items.Refresh();
+            });
+            
         }
 
         private void Button_Click_Save(object sender, RoutedEventArgs e)
