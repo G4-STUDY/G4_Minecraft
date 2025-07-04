@@ -14,7 +14,7 @@
               Width="700"
               Background="Transparent"
               ScrollViewer.VerticalScrollBarVisibility="Auto"
-              ScrollViewer.HorizontalScrollBarVisibility="Auto">
+              ScrollViewer.HorizontalScrollBarVisibility="Auto" Height="147">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="name" Binding="{Binding Name}" />
                 <DataGridTextColumn Header="price" Binding="{Binding Price}" />
@@ -33,7 +33,7 @@
               Width="700"
               Background="Transparent"
               ScrollViewer.VerticalScrollBarVisibility="Auto"
-              ScrollViewer.HorizontalScrollBarVisibility="Auto">
+              ScrollViewer.HorizontalScrollBarVisibility="Auto" Height="148">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="name" Binding="{Binding Name}" />
                 <DataGridTextColumn Header="price" Binding="{Binding Price}" />
@@ -47,11 +47,9 @@
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
-        <Button x:Name="buy" Content="사기" HorizontalAlignment="Left" Height="36" Margin="133,406,0,0" VerticalAlignment="Top" Width="179" Click="Buy_Click"/>
-        <Button x:Name="sell" Content="팔기" HorizontalAlignment="Left" Height="36" Margin="492,401,0,0" VerticalAlignment="Top" Width="179" Click="sell_Click"/>
-        <TextBlock x:Name="money" HorizontalAlignment="Left" Margin="630,19,0,0" TextWrapping="Wrap" Text="{Binding Money}" VerticalAlignment="Top" Width="120"/>
-
-        <TextBox FontSize="20" x:Name="input" TextWrapping="Wrap" Text="" Width="795" Height="42"/>
+        <Button x:Name="buy" Content="사기" HorizontalAlignment="Center" Height="36" Click="Buy_Click"/>
+        <Button x:Name="sell" Content="팔기" HorizontalAlignment="Center" Height="36" Click="sell_Click"/>
         <Button FontSize="20" Content="메뉴로" Height="48" Click="Button_Click"/>
+        <TextBlock x:Name="money" HorizontalAlignment= "Center" />
     </StackPanel>
 </Page>

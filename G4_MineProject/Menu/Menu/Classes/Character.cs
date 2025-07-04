@@ -73,10 +73,15 @@ namespace Menu.Classes
             return true;
         }
 
+        public void FindProp(Prop prop)
+        {
+            Prop existing = inventory.Find(p => p.Name == prop.Name);
+        }
+
         // 인벤토리에서 제거
         public void RemoveProp(Prop prop)
         {
-            Prop existing = inventory.Find(p => p.Name == prop.Name);
+            FindProp(prop);
 
             if (existing.Amount == 1)
             {
@@ -87,6 +92,14 @@ namespace Menu.Classes
                 existing.Amount -= 1;
             }
         }
+        
+        // 음식 먹기
+        public void EatFood(Food food)
+        {
+            
+        }
+
+        // 장비 장착
 
     }
 }

@@ -21,6 +21,9 @@ namespace Menu.Pages
     /// </summary>
     public partial class Shoppage : Page
     {
+        private Shop shop = new();
+        private Character character = ((App)Application.Current).mainCharacter;
+
         public Shoppage()
         {
             InitializeComponent();
@@ -37,6 +40,46 @@ namespace Menu.Pages
         }
 
         private void Buy_Click(object sender, RoutedEventArgs e)
+        {
+            Equipment selectedEquipment = equipmentList.SelectedItem as Equipment;
+            Food selectedFood = foodList.SelectedItem as Food;
+
+            Prop prop = null;
+
+            if (selectedEquipment != null)
+            {
+                prop = selectedEquipment;
+            }
+            else if (selectedFood != null)
+            {
+                prop = selectedFood;
+            }
+
+            if (prop == null)
+            {
+                MessageBox.Show("아이템을 선택해주세요.");
+                return;
+            }
+
+            bool result = character.BuyProp(shop, prop);
+            if (result)
+            {
+                MessageBox.Show($"{prop.Name} 을(를) 구매했습니다!");
+                money.Text = character.Money.ToString(); // 돈 갱신
+
+            }
+            else
+            {
+                MessageBox.Show($"{prop.Name} 을(를) 구매할 수 없습니다.");
+            }
+
+            // 선택 해제
+            equipmentList.SelectedItem = null;
+            foodList.SelectedItem = null;
+
+        }
+
+        private void sell_Click(object sender, RoutedEventArgs e)
         {
 
         }
