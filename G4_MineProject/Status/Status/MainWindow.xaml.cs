@@ -170,7 +170,7 @@ namespace Status
 
         //MJ
         private List<Prop> Inventory = new List<Prop>();
-        //private List<Prop> Equipped = new List<Prop>();
+        private List<Prop> Equipped = new List<Prop>();
         private int? sourceRow = null;
         private int? sourceCol = null;
         //~Mj
@@ -265,7 +265,7 @@ namespace Status
         }
 
         //MJ
-        private void AddProp(Prop newProp)
+        private void AddProp_Inventory(Prop newProp)
         {
             Inventory.Add(newProp);
             int index = Inventory.Count - 1;
@@ -299,7 +299,7 @@ namespace Status
                 amount = Int32.Parse(amountv.Text);
 
                 Resource newProp = new Resource(name, price, amount, imgsource);
-                AddProp(newProp);
+                AddProp_Inventory(newProp);
 
             }
             else if (healthv.Text == "")
@@ -311,7 +311,7 @@ namespace Status
                 damage = Int32.Parse(damagev.Text);
 
                 Equipment newProp = new Equipment(name, price, amount, imgsource, force, damage);
-                AddProp(newProp);
+                AddProp_Inventory(newProp);
             }
             else if (forcev.Text == "" && damagev.Text == "")
             {
@@ -320,8 +320,8 @@ namespace Status
                 amount = Int32.Parse(amountv.Text);
                 health = Int32.Parse(healthv.Text);
 
-                Food newProp = new Food(name, price, amount, imgsource,health);
-                AddProp(newProp);
+                Food newProp = new Food(name, price, amount, imgsource, health);
+                AddProp_Inventory(newProp);
             }
 
             // 30개 칸 중 몇 번째 칸인지 계산
@@ -424,6 +424,48 @@ namespace Status
             // 새 기준 셀 설정
             sourceRow = currentRow;
             sourceCol = currentCol;
+        }
+        private void Equipped_Grid_CurrentCellChanged(object sender, EventArgs e)
+        {
+
+        }
+        private void AddProp_Equipped(Prop newProp)
+        {
+            Equipped.Add(newProp);
+
+            var rowList = (List<RowData>)Equipped_Grid.ItemsSource;
+            foreach (var row in rowList)
+            {
+                var existing = (Prop)typeof(RowData).GetProperty("P1")?.GetValue(row);
+                if (existing == null)
+                {
+                    typeof(RowData).GetProperty("P1")?.SetValue(row, newProp);
+                    break;
+                }
+            }
+
+            Equipped_Grid.Items.Refresh();
+        }
+        private void Equip_Button_Click(object sender, RoutedEventArgs e)
+        {
+
+            string name = Namev.Text;
+            int price = Int32.Parse(Pricev.Text);
+            int amount = Int32.Parse(Amountv.Text);
+            int force = Int32.Parse(Forcev.Text);
+            int damage = Int32.Parse(Damagev.Text);
+
+            string imgsource = "a";
+
+            Equipment newProp = new Equipment(name, price, amount, imgsource, force, damage);
+            AddProp_Equipped(newProp);
+
+            Namev.Text = "";
+            Pricev.Text = "";
+            Amountv.Text = "";
+            Forcev.Text = "";
+            Damagev.Text = "";
+
         }
         //~Mj
     }
