@@ -72,9 +72,8 @@ namespace Menu
             MyCharacter.Attack = c.Attack;
             MyCharacter.Money = c.Money;
         }
-        protected override void OnInitialized(EventArgs e)
+        public void serverinit()
         {
-            base.OnInitialized(e);
             client = new TcpClient();
             string serverIP = GetLocalIP();
             client.Connect(serverIP, 1234);
@@ -87,12 +86,17 @@ namespace Menu
             writer = new StreamWriter(stream);
             Thread th = new Thread(new ThreadStart(readMsg));
             th.Start();
+        }
+        protected override void OnInitialized(EventArgs e)
+        {
+            base.OnInitialized(e);
+            //serverinit();
 
         }
 
-        public void readMsg()
-        {
-            string msg;
+            public void readMsg()
+            {
+                string msg;
             bool flag = true;
             byte[] buffer = new byte[1024];
             int bytesRead;
@@ -170,7 +174,7 @@ namespace Menu
             };
             string json = JsonConvert.SerializeObject(wrapper);
             byte[] data = Encoding.UTF8.GetBytes(json);
-            stream.Write(data, 0, data.Length);
+            //stream.Write(data, 0, data.Length);
         }
 
         public void SwitchPage(Page page)

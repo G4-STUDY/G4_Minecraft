@@ -7,50 +7,96 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="Shoppage">
-    <StackPanel Orientation="Vertical">
-        <TextBox FontSize="20" x:Name="title" TextWrapping="Wrap" Text="여기는 상점" Width="795" Height="42"/>
-        <DataGrid x:Name="equipmentList"
-              AutoGenerateColumns="False"
-              Width="700"
-              Background="Transparent"
-              ScrollViewer.VerticalScrollBarVisibility="Auto"
-              ScrollViewer.HorizontalScrollBarVisibility="Auto" Height="123">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="name" Binding="{Binding Name}" />
-                <DataGridTextColumn Header="price" Binding="{Binding Price}" />
-                <DataGridTextColumn Header="amount" Binding="{Binding Amount}" />
-                <DataGridTemplateColumn Header="Image" Width="100" IsReadOnly="True">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <Image Source="{Binding Imgsource}" Width="60" Height="60"/>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-            </DataGrid.Columns>
-        </DataGrid>
-        <DataGrid x:Name="foodList"
-              AutoGenerateColumns="False"
-              Width="700"
-              Background="Transparent"
-              ScrollViewer.VerticalScrollBarVisibility="Auto"
-              ScrollViewer.HorizontalScrollBarVisibility="Auto" Height="148">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="name" Binding="{Binding Name}" />
-                <DataGridTextColumn Header="price" Binding="{Binding Price}" />
-                <DataGridTextColumn Header="amount" Binding="{Binding Amount}" />
-                <DataGridTemplateColumn Header="Image" Width="100" IsReadOnly="True">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <Image Source="{Binding Imgsource}" Width="60" Height="60"/>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-            </DataGrid.Columns>
-        </DataGrid>
-        <TextBlock x:Name="money" HorizontalAlignment= "Center" Text="여기는 상점"/>
+    <Page.Background>
+        <ImageBrush ImageSource="/Images/shopImage.jpg" Stretch="Fill" />
+    </Page.Background>
+    <Grid Cursor="">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <ListBox x:Name="equipmentList"
+         ItemsSource="{Binding EquipmentList}"
+         Width="320" Height="271" Margin="0,106,431,0"
+         Background="Transparent" BorderThickness="0"
+         ScrollViewer.VerticalScrollBarVisibility="Auto"
+         HorizontalAlignment="Right" VerticalAlignment="Top">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Border Width ="280" Margin="4" Padding="8" Background="#FFF6F6F6" CornerRadius="8" BorderBrush="#FFCCCCCC" BorderThickness="1">
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                            <Image Source="{Binding Imgsource}" Width="60" Height="60" Margin="0,0,12,0"/>
+                            <StackPanel>
+                                <TextBlock Text="{Binding Name}" FontWeight="Bold" FontSize="16"/>
+                                <TextBlock Text="{Binding Price, StringFormat=가격: {0}}" FontSize="14"/>
+                                <TextBlock Text="{Binding Amount, StringFormat=수량: {0}}" FontSize="14"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </Border>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
 
-        <Button x:Name="buy" Content="사기" HorizontalAlignment="Center" Height="36" Click="Buy_Click"/>
-        <Button x:Name="sell" Content="팔기" HorizontalAlignment="Center" Height="36" Click="sell_Click"/>
-        <Button FontSize="20" Content="메뉴로" Height="30" Click="Button_Click"/>
-    </StackPanel>
+        <ListBox x:Name="foodList"
+         ItemsSource="{Binding FoodList}"
+         Width="320" Height="271" Margin="431,106,0,0"
+         Background="Transparent" BorderThickness="0"
+         ScrollViewer.VerticalScrollBarVisibility="Auto"
+         HorizontalAlignment="Left" VerticalAlignment="Top">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Border Width ="280" Margin="4" Padding="8" Background="#FFF6F6F6" CornerRadius="8" BorderBrush="#FFCCCCCC" BorderThickness="1">
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                            <Image Source="{Binding Imgsource}" Width="60" Height="60" Margin="0,0,12,0"/>
+                            <StackPanel>
+                                <TextBlock Text="{Binding Name}" FontWeight="Bold" FontSize="16"/>
+                                <TextBlock Text="{Binding Price, StringFormat=가격: {0}}" FontSize="14"/>
+                                <TextBlock Text="{Binding Amount, StringFormat=수량: {0}}" FontSize="14"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </Border>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+
+        <Button x:Name="buy"
+        Content="BUY"
+        HorizontalAlignment="Center"
+        Height="36"
+        Width="98"
+        Margin="0,382,0,32"
+        Click="Buy_Click"
+        Background="#FF545454"
+        BorderThickness="1"
+        Foreground="White"
+        FontFamily="Malgun Gothic"
+        FontSize="16"
+        Cursor="Hand" BorderBrush="Black">
+            <Button.Effect>
+                <DropShadowEffect Color="Black" BlurRadius="5" ShadowDepth="2"/>
+            </Button.Effect>
+        </Button>
+        <Button HorizontalAlignment="Left"
+        Margin="10,10,0,0"
+        VerticalAlignment="Top"
+        Height="36"
+        Width="71"
+        Click="Button_Click"
+        Background="#FF545454"
+        BorderThickness="1"
+        BorderBrush="Black"
+        Foreground="White"
+        FontFamily="Malgun Gothic"
+        FontSize="16"
+        FontWeight="Bold"
+        Cursor="Hand">
+            <Button.Effect>
+                <DropShadowEffect Color="Black" BlurRadius="5" ShadowDepth="2"/>
+            </Button.Effect>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <TextBlock Text="←" FontSize="18" Margin="0,0,0,5"/>
+            </StackPanel>
+        </Button>
+        <TextBlock HorizontalAlignment="Left" Margin="163,57,0,0" TextWrapping="Wrap" Text="Equipment" VerticalAlignment="Top" Foreground="White" FontSize="18" FontWeight="Bold"/>
+        <TextBlock HorizontalAlignment="Left" Margin="569,57,0,0" TextWrapping="Wrap" Text="Food" VerticalAlignment="Top" FontWeight="Bold" Foreground="White" FontSize="18"/>
+    </Grid>
 </Page>

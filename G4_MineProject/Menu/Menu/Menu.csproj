@@ -9,12 +9,39 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Images\equiptment\boots.png" />
+    <None Remove="Images\equiptment\helmet.png" />
+    <None Remove="Images\equiptment\helmet2.png" />
+    <None Remove="Images\equiptment\pickaxe1.png" />
+    <None Remove="Images\equiptment\pickaxe2.png" />
+    <None Remove="Images\equiptment\pickaxe3.png" />
+    <None Remove="Images\equiptment\pickaxe4.png" />
+    <None Remove="Images\equiptment\pickaxe5.png" />
+    <None Remove="Images\equiptment\trousers.png" />
+    <None Remove="Images\equiptment\tunic.png" />
     <None Remove="Images\ex1.jpg" />
     <None Remove="Images\ex2.jpg" />
+    <None Remove="Images\food\apple.png" />
+    <None Remove="Images\food\basePotion.png" />
+    <None Remove="Images\food\cake.png" />
+    <None Remove="Images\food\carrot.png" />
+    <None Remove="Images\food\chorusFruit.png" />
+    <None Remove="Images\food\honeyBottle.png" />
+    <None Remove="Images\food\luckPotion.png" />
+    <None Remove="Images\food\melonSlice.png" />
+    <None Remove="Images\food\Potato.png" />
+    <None Remove="Images\food\salmon.png" />
     <None Remove="Images\ForestImage.jpg" />
     <None Remove="Images\MenuImage.jpg" />
     <None Remove="Images\MineImage.png" />
+    <None Remove="Images\shopImage.jpg" />
     <None Remove="Images\WorkPlaceImage.jpg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Images\equiptment\pickaxe4.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
   <ItemGroup>
@@ -22,10 +49,67 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Images\equiptment\boots.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\equiptment\helmet.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\equiptment\helmet2.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\equiptment\pickaxe1.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\equiptment\pickaxe2.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\equiptment\pickaxe3.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\equiptment\pickaxe5.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\equiptment\trousers.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\equiptment\tunic.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Images\ex1.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Images\ex2.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\food\apple.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\food\basePotion.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\food\cake.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\food\carrot.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\food\chorusFruit.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\food\honeyBottle.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\food\luckPotion.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\food\melonSlice.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\food\Potato.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\food\salmon.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Images\ForestImage.jpg">
@@ -35,6 +119,9 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Images\MineImage.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\shopImage.jpg">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Images\WorkPlaceImage.jpg">

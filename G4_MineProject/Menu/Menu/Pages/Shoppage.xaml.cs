@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Menu.Classes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,7 +13,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Menu.Classes;
+using static System.Net.Mime.MediaTypeNames;
+using static System.Reflection.Metadata.BlobBuilder;
 
 namespace Menu.Pages
 {
@@ -69,7 +71,7 @@ namespace Menu.Pages
             if (result)
             {
                 MessageBox.Show($"{prop.Name} 을(를) 구매했습니다!");
-                money.Text = character.Money.ToString(); // 돈 갱신
+                //money.Text = character.Money.ToString(); // 돈 갱신
 
             }
             else
@@ -91,13 +93,28 @@ namespace Menu.Pages
         private void InitializeProp()
         {
             //장비 추가
-            shop.EquipmentList.Add(new Equipment("장비1", 5000, 10, "resource\\ex1.jpg", 100, 10));
-            shop.EquipmentList.Add(new Equipment("장비2", 7000, 5, "resource\\ex2.jpg", 200, 5));
-            shop.EquipmentList.Add(new Equipment("장비3", 9000, 2, "resource\\ex1.jpg", 300, 2));
+            shop.EquipmentList.Add(new Equipment("황금 헬멧", 5000, 1, "\\Images\\equiptment\\helmet.png", 100, 20));
+            shop.EquipmentList.Add(new Equipment("황금 갑옷", 5000, 1, "\\Images\\equiptment\\tunic.png", 100, 20));
+            shop.EquipmentList.Add(new Equipment("황금 바지", 5000, 1, "\\Images\\equiptment\\trousers.png", 100, 20));
+            shop.EquipmentList.Add(new Equipment("황금 부츠", 5000, 1, "\\Images\\equiptment\\boots.png", 100, 20));
+            shop.EquipmentList.Add(new Equipment("나무 곡괭이", 1000, 1, "\\Images\\equiptment\\pickaxe1.png", 10, 50));
+            shop.EquipmentList.Add(new Equipment("돌 곡괭이", 2000, 1, "\\Images\\equiptment\\pickaxe2.png", 20, 40));
+            shop.EquipmentList.Add(new Equipment("철 곡괭이", 3000, 1, "\\Images\\equiptment\\pickaxe3.png", 30, 30));
+            shop.EquipmentList.Add(new Equipment("금 곡갱이", 5000, 1, "\\Images\\equiptment\\pickaxe4.png", 50, 20));
+            shop.EquipmentList.Add(new Equipment("다이아 곡괭이", 8000, 1, "\\Images\\equiptment\\pickaxe5.png", 80, 5));
+
 
             //음식 추가
-            shop.FoodList.Add(new Food("음식1", 1000, 5, "resource\\ex1.jpg", 10));
-            shop.FoodList.Add(new Food("음식2", 500, 3, "resource\\ex1.jpg", 5));
+            shop.FoodList.Add(new Food("사과", 1000, 5, "\\Images\\food\\apple.png", 10));
+            shop.FoodList.Add(new Food("케이크", 2000, 5, "\\Images\\food\\cake.png", 20));
+            shop.FoodList.Add(new Food("당근", 1000, 5, "\\Images\\food\\carrot.png", 10));
+            shop.FoodList.Add(new Food("후렴과", 3000, 5, "\\Images\\food\\chorusFruit.png", 30));
+            shop.FoodList.Add(new Food("수박 조각", 1000, 5, "\\Images\\food\\melonSlice.png", 10));
+            shop.FoodList.Add(new Food("감자", 1000, 5, "\\Images\\food\\Potato.png", 10));
+            shop.FoodList.Add(new Food("연어", 2000, 5, "\\Images\\food\\salmon.png", 20));
+            shop.FoodList.Add(new Food("꿀이 든 병", 3000, 5, "\\Images\\food\\honeyBottle.png", 30));
+            shop.FoodList.Add(new Food("기본 물약", 3000, 5, "\\Images\\food\\basePotion.png", 30));
+            shop.FoodList.Add(new Food("행운의 물약", 5000, 5, "\\Images\\food\\luckPotion.png", 50));
         }
     }
 }
