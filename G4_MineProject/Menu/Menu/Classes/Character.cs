@@ -47,6 +47,15 @@ namespace Menu.Classes
             get { return equipped; }
             set { equipped = value; }
         }
+        public Character()
+        {
+            hp = 100;
+            health = 10;
+            attack = 10;
+            money = 50000;
+
+        }
+
         public bool BuyProp(Shop shop, Prop prop)
         {
             return shop.Sell(prop, this);
@@ -98,14 +107,9 @@ namespace Menu.Classes
                 existing.Amount -= 1;
             }
         }
-        public Character()
-        {
-            hp = 100;
-            health = 10;
-            attack = 10;
-            money = 50000;
 
-        }
+
+
     }
 }
         

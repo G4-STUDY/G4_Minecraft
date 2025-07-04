@@ -142,7 +142,7 @@ namespace Status
         {
             var wrapper = new 
             {
-                Type = "Character",
+                Type = "charactor",
                 Act = act,
                 Data = c  // 기존 객체 p 포함
             };
@@ -168,7 +168,7 @@ namespace Status
         private NetworkStream stream;
         private StreamWriter writer;
         private StreamReader reader;
-
+        public static CServer s;
         //MJ
         private List<Prop> Inventory = new List<Prop>();
         private List<Prop> Equipped = new List<Prop>();
@@ -235,7 +235,7 @@ namespace Status
                 while (true)
                 {
                     TcpClient client = listener.AcceptTcpClient();
-                    CServer s = new CServer(client);
+                    s = new CServer(client);
                     if (s != null)
                     {
                         MessageBox.Show("유저접속");
@@ -455,17 +455,18 @@ namespace Status
         }
         private void Equip_Button_Click(object sender, RoutedEventArgs e)
         {
+            Prop newProp = (Prop)inventory.SelectedItem;
+            //string name = Namev.Text;
+            //int price = Int32.Parse(Pricev.Text);
+            //int amount = Int32.Parse(Amountv.Text);
+            //int force = Int32.Parse(Forcev.Text);
+            //int damage = Int32.Parse(Damagev.Text);
 
-            string name = Namev.Text;
-            int price = Int32.Parse(Pricev.Text);
-            int amount = Int32.Parse(Amountv.Text);
-            int force = Int32.Parse(Forcev.Text);
-            int damage = Int32.Parse(Damagev.Text);
+            //string imgsource = "a";
 
-            string imgsource = "a";
-
-            Equipment newProp = new Equipment(name, price, amount, imgsource, force, damage);
-            AddProp_Equipped(newProp);
+            //Equipment newProp = new Equipment(name, price, amount, imgsource, force, damage);
+            //AddProp_Equipped(newProp);
+            UseProp(newProp);
 
             Namev.Text = "";
             Pricev.Text = "";
@@ -475,5 +476,51 @@ namespace Status
 
         }
         //~Mj
+        
+
+        public void UseProp(Prop prop)
+        {
+            if (prop is Resource)
+            {
+
+                return;
+            }
+            else if (prop is Equipment)
+            {
+                Equipment equipment = (Equipment)prop;
+                AddProp_Equipped(equipment);
+                character.Attack += equipment.Force;
+                character.Health += equipment.Damage;
+                Inventory.Remove(equipment);
+            }
+            else if (prop is Food)
+            {
+                Food food = (Food)prop;
+                character.Hp += food.Healnum;
+                Inventory.Remove(food);
+            }
+            MainWindow.s.SendCharacter(character, 2);
+            MessageBox.Show("gogo");
+            //반대쪽에 알려줘라
+            
+        }
+
+        public void SellProp(Prop prop)
+        {
+            if (prop is Resource)
+            {
+                Resource resource = (Resource)prop;
+                character.Money += resource.Price;
+                Inventory.Remove(resource);
+            }
+            else if (prop is Equipment)
+            {
+                Equipment equipment = (Equipment)prop;
+                character.Money += equipment.Price;
+                Inventory.Remove(equipment);
+            }
+
+        }
+
     }
 }

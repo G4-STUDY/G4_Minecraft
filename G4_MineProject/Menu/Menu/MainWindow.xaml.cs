@@ -103,6 +103,7 @@ namespace Menu
                 json = Encoding.UTF8.GetString(buffer, 0, bytesRead);
                 JObject root = JObject.Parse(json);
                 string type = root["Type"]?.ToString();
+                MessageBox.Show("갱신완료?????");
                 if (type == "Prop")
                 {
                     Prop received = root["Data"].ToObject<Prop>();
@@ -123,6 +124,7 @@ namespace Menu
                 }
                 else if (type == "charactor")
                 {
+                    MessageBox.Show("갱신완료?????2323");
                     string act = root["Act"]?.ToString();
                     if (act == "1")
                     {   
@@ -132,6 +134,7 @@ namespace Menu
                     {
                         Character chac = root["Data"].ToObject<Character>();
                         Charactor_refresh(chac);
+                        MessageBox.Show("갱신완료");
                         //캐릭터 갱신 메소드
                     }
                 }
