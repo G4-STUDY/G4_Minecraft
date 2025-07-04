@@ -45,7 +45,8 @@ namespace Menu.Classes
 
             prop.Amount -= 1;
             character.Money -= prop.Price;
-            character.AddProp(prop); // 캐릭터 인벤토리에 추가
+            //character.AddProp(prop); // 캐릭터 인벤토리에 추가
+            MainWindow.mainWindow.SendProp(prop, 1);
             return true;
         }
 

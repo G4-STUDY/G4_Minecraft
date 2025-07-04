@@ -87,7 +87,7 @@ namespace Menu.Classes
         // 인벤토리에서 제거
         public void RemoveProp(Prop prop)
         {
-            FindProp(prop);
+            Prop existing = inventory.Find(p => p.Name == prop.Name);
 
             if (existing.Amount == 1)
             {
@@ -103,19 +103,9 @@ namespace Menu.Classes
             hp = 100;
             health = 10;
             attack = 10;
-            money = 5000;
+            money = 50000;
 
         }
     }
 }
         
-        // 음식 먹기
-        public void EatFood(Food food)
-        {
-            
-        }
-
-        // 장비 장착
-
-    }
-}

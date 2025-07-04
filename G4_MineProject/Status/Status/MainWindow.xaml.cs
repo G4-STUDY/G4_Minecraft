@@ -6,6 +6,7 @@ using Newtonsoft.Json.Linq;
 using System.IO;
 using System.Net;
 using System.Net.Sockets;
+using System.Security.Policy;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -54,6 +55,10 @@ namespace Status
             MainWindow.character.Health = c.Health;
             MainWindow.character.Attack = c.Attack;
             MainWindow.character.Money = c.Money;
+            MainWindow.curwindow.Dispatcher.Invoke(() =>
+            {
+                MainWindow.curwindow.money.Text = c.Money.ToString();
+            });
         }
         public void run()
         {
@@ -69,26 +74,17 @@ namespace Status
                 json = Encoding.UTF8.GetString(buffer, 0, bytesRead);
                 JObject root = JObject.Parse(json);
                 string type = root["Type"]?.ToString();
-                MessageBox.Show("받기1");
                 if (type == "Prop")
                 {
                     Prop received = root["Data"].ToObject<Prop>();
                     string act = root["Act"]?.ToString();
-                    MessageBox.Show("받기2" + act);
                     switch (act)
                     {
                         case "1":
-                            // Prop 구매 처리 로직
-                            /*
-                                chac.money-=recevie.price
-                                //돈이없을때 예외처리
-                                chac.inventory.add(receive);
-                             */
+                            MainWindow.curwindow.AddProp_Inventory(received);
                             break;
                         case "2":
-                            MessageBox.Show("받기3");
-                            MessageBox.Show(received.Name+ received.Price+ received.Amount);
-                            
+                    
                             MainWindow.curwindow.AddProp_Inventory(received);
                             // Prop 획득 처리 로직
 

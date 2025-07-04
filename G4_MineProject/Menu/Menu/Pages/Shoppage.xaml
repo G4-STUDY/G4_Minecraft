@@ -14,7 +14,7 @@
               Width="700"
               Background="Transparent"
               ScrollViewer.VerticalScrollBarVisibility="Auto"
-              ScrollViewer.HorizontalScrollBarVisibility="Auto" Height="147">
+              ScrollViewer.HorizontalScrollBarVisibility="Auto" Height="123">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="name" Binding="{Binding Name}" />
                 <DataGridTextColumn Header="price" Binding="{Binding Price}" />
@@ -47,9 +47,10 @@
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
+        <TextBlock x:Name="money" HorizontalAlignment= "Center" Text="여기는 상점"/>
+
         <Button x:Name="buy" Content="사기" HorizontalAlignment="Center" Height="36" Click="Buy_Click"/>
         <Button x:Name="sell" Content="팔기" HorizontalAlignment="Center" Height="36" Click="sell_Click"/>
-        <Button FontSize="20" Content="메뉴로" Height="48" Click="Button_Click"/>
-        <TextBlock x:Name="money" HorizontalAlignment= "Center" />
+        <Button FontSize="20" Content="메뉴로" Height="30" Click="Button_Click"/>
     </StackPanel>
 </Page>

@@ -37,6 +37,7 @@ namespace Menu
             InitializeComponent();
             mainWindow = this;
             MyCharacter = new Character();
+            MessageBox.Show(MyCharacter.Money.ToString()+"dd");
             mainpage =new Pages.Mainpage();
             minepage = new Pages.Minepage();
             shoppage = new Pages.Shoppage();
@@ -148,6 +149,10 @@ namespace Menu
             };
             string json = JsonConvert.SerializeObject(wrapper);
             byte[] data = Encoding.UTF8.GetBytes(json);
+            if (act == 1)
+            {
+                SendCharacter(MyCharacter, 2);//상점에서 구매했으면 돈깎고 캐릭터갱신해라
+            }
             stream.Write(data, 0, data.Length);
         }
 
@@ -156,7 +161,7 @@ namespace Menu
         {
             var wrapper = new
             {
-                Type = "Character",
+                Type = "charactor",
                 Act = act,
                 Data = c  // 기존 객체 p 포함
             };
@@ -179,6 +184,7 @@ namespace Menu
                 Mine mine = (Mine)page;
                 mine.CharHp.Value = MyCharacter.Hp;
             }
+            SendCharacter(MyCharacter, 2);
         }
 
         //다른 페이지에서 쓸 prop전달 메소드 

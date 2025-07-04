@@ -22,11 +22,15 @@ namespace Menu.Pages
     public partial class Shoppage : Page
     {
         private Shop shop = new();
-        private Character character = ((App)Application.Current).mainCharacter;
-
+        private Character character;
         public Shoppage()
         {
             InitializeComponent();
+            InitializeProp();
+            equipmentList.ItemsSource = shop.EquipmentList;
+            foodList.ItemsSource = shop.FoodList;
+            character = MainWindow.MyCharacter;
+            MessageBox.Show(character.Money.ToString());
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -82,6 +86,18 @@ namespace Menu.Pages
         private void sell_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void InitializeProp()
+        {
+            //장비 추가
+            shop.EquipmentList.Add(new Equipment("장비1", 5000, 10, "resource\\ex1.jpg", 100, 10));
+            shop.EquipmentList.Add(new Equipment("장비2", 7000, 5, "resource\\ex2.jpg", 200, 5));
+            shop.EquipmentList.Add(new Equipment("장비3", 9000, 2, "resource\\ex1.jpg", 300, 2));
+
+            //음식 추가
+            shop.FoodList.Add(new Food("음식1", 1000, 5, "resource\\ex1.jpg", 10));
+            shop.FoodList.Add(new Food("음식2", 500, 3, "resource\\ex1.jpg", 5));
         }
     }
 }
