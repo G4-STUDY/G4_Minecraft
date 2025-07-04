@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Status"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <StackPanel Orientation="Horizontal">
+    <StackPanel Orientation="Horizontal" Background="LightGray">
         <Grid Width="123">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
@@ -21,7 +21,8 @@
                 <RowDefinition/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
-            <TextBlock Text="name" Grid.Row="0" Grid.Column="0"/>
+
+            <TextBlock Text="name"  Grid.Row="0" Grid.Column="0"/>
             <TextBox x:Name="namev" Grid.Row="0" Grid.Column="1"/>
             <TextBlock Text="price" Grid.Row="1" Grid.Column="0"/>
             <TextBox x:Name="pricev" Grid.Row="1" Grid.Column="1"/>
@@ -39,15 +40,23 @@
         <Grid Width="510">
             <DataGrid 
             x:Name="Equipped_Grid" 
+            GridLinesVisibility="All"
+            HorizontalGridLinesBrush="LightGray"
+            VerticalGridLinesBrush="LightGray"
             IsReadOnly="True" 
             SelectionUnit="Cell" 
             AutoGenerateColumns="False" 
             CanUserAddRows="False" 
             Margin="58,0,373,233" 
             SelectionChanged="Equipped_Grid_CurrentCellChanged">
-            </DataGrid>      
+            </DataGrid>
+
             <DataGrid 
             x:Name="inventory" 
+            GridLinesVisibility="All"
+            HorizontalGridLinesBrush="LightGray"
+            VerticalGridLinesBrush="LightGray"
+            
             IsReadOnly="True" 
             SelectionUnit="Cell" 
             AutoGenerateColumns="False" 
@@ -58,7 +67,8 @@
             <Button Content="장착" HorizontalAlignment="Left" Margin="416,154,0,0" VerticalAlignment="Top" Click="Equip_Button_Click"/>
             <Button Content="판매" HorizontalAlignment="Left" Margin="416,174,0,0" VerticalAlignment="Top" Click="Sell_Button_Click"/>
             <TextBlock  HorizontalAlignment="Left" Margin="331,47,0,0" TextWrapping="Wrap" Text="돈" VerticalAlignment="Top"/>
-            <TextBlock x:Name="money" HorizontalAlignment="Left" Margin="348,47,0,0" TextWrapping="Wrap" Text="500" VerticalAlignment="Top"/>
+            <TextBlock x:Name="money" Background="White" HorizontalAlignment="Left" Margin="348,47,0,0" TextWrapping="Wrap" Text="500" VerticalAlignment="Top"/>
+            <Image Source="/Image/CharcterImage.png" HorizontalAlignment="Left" Height="139" Margin="158,24,0,0" VerticalAlignment="Top" Width="106"/>
         </Grid>
         <Grid Height="226" Width="137" VerticalAlignment="Top">
             <Grid.ColumnDefinitions>
@@ -86,6 +96,7 @@
             <TextBox x:Name="Damagev" Grid.Row="4" Grid.Column="1"/>
             <TextBlock Text="Health" Grid.Row="5" Grid.Column="0"/>
             <TextBox x:Name="Healthv" Grid.Row="5" Grid.Column="1"/>
+            <TextBlock HorizontalAlignment="Left" Margin="10,11,0,0" Grid.Row="6" TextWrapping="Wrap" Text="선택 아이템 정보" VerticalAlignment="Top" Grid.ColumnSpan="2" Height="18" Width="117"/>
         </Grid>
     </StackPanel>
 
