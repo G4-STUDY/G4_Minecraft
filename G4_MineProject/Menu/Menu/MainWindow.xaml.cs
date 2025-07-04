@@ -37,7 +37,6 @@ namespace Menu
             InitializeComponent();
             mainWindow = this;
             MyCharacter = new Character();
-            MessageBox.Show(MyCharacter.Money.ToString()+"dd");
             mainpage =new Pages.Mainpage();
             minepage = new Pages.Minepage();
             shoppage = new Pages.Shoppage();
@@ -107,7 +106,6 @@ namespace Menu
                 json = Encoding.UTF8.GetString(buffer, 0, bytesRead);
                 JObject root = JObject.Parse(json);
                 string type = root["Type"]?.ToString();
-                MessageBox.Show("갱신완료?????");
                 if (type == "Prop")
                 {
                     Prop received = root["Data"].ToObject<Prop>();

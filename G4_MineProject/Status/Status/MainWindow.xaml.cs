@@ -59,7 +59,6 @@ namespace Status
             MainWindow.character.Money = c.Money;
             MainWindow.curwindow.Dispatcher.Invoke(() =>
             {
-                MessageBox.Show("돈갱신"+ c.Money.ToString());
                 MainWindow.curwindow.money.Text = c.Money.ToString();
             });
         }
@@ -105,7 +104,6 @@ namespace Status
                     else
                     {
                         Character chac = root["Data"].ToObject<Character>();
-                        MessageBox.Show("뭔데");
                         Charactor_refresh(chac);
                     }
                     //캐릭터 갱신 메소드
@@ -235,7 +233,6 @@ namespace Status
                 IPAddress addr = IPAddress.Any;
                 TcpListener listener = new TcpListener(addr, 1234);
                 listener.Start();
-                MessageBox.Show("서버실행");
                 while (true)
                 {
                     TcpClient client = listener.AcceptTcpClient();
@@ -278,10 +275,8 @@ namespace Status
                 int index = Inventory.Count - 1; 
                 int row = index / 10;
                 int col = index % 10;
-
                 RowData rowData = ((List<RowData>)inventory.ItemsSource)[row];
                 typeof(RowData).GetProperty($"P{col + 1}")?.SetValue(rowData, newProp);
-
                 inventory.Items.Refresh();
             });
 
@@ -435,6 +430,13 @@ namespace Status
                     Pricev.Text = cP.Price.ToString();
                     Amountv.Text = cP.Amount.ToString();
                     Healthv.Text = cP.Healnum.ToString();
+                }
+                else
+                {
+
+                    Namev.Text = currentProp.Name;
+                    Pricev.Text = currentProp.Price.ToString();
+                    Amountv.Text = currentProp.Amount.ToString();
                 }
             }
             else

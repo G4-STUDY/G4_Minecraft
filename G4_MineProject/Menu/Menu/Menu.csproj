@@ -31,8 +31,22 @@
     <None Remove="Images\food\melonSlice.png" />
     <None Remove="Images\food\Potato.png" />
     <None Remove="Images\food\salmon.png" />
+    <None Remove="Images\ForestImage.png" />
+    <None Remove="Images\gotoForest.png" />
+    <None Remove="Images\gotoMine.jpg" />
     <None Remove="Images\MenuImage.jpg" />
+    <None Remove="Images\MineImage.png" />
+    <None Remove="Images\Mineral1.png" />
+    <None Remove="Images\Mineral2.png" />
+    <None Remove="Images\Mineral3.png" />
+    <None Remove="Images\Mineral4.png" />
     <None Remove="Images\shopImage.jpg" />
+    <None Remove="Images\Tree1.png" />
+    <None Remove="Images\Tree2.png" />
+    <None Remove="Images\Tree3.png" />
+    <None Remove="Images\Tree4.png" />
+    <None Remove="Images\Working.png" />
+    <None Remove="Images\WorkPlaceImage.jpg" />
   </ItemGroup>
 
   <ItemGroup>
@@ -109,10 +123,26 @@
     <Resource Include="Images\food\salmon.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Images\ForestImage.png" />
+    <Resource Include="Images\gotoForest.png" />
+    <Resource Include="Images\gotoMine.jpg" />
     <Resource Include="Images\MenuImage.jpg">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Images\MineImage.png" />
+    <Resource Include="Images\Mineral1.png" />
+    <Resource Include="Images\Mineral2.png" />
+    <Resource Include="Images\Mineral3.png" />
+    <Resource Include="Images\Mineral4.png" />
     <Resource Include="Images\shopImage.jpg">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\Tree1.png" />
+    <Resource Include="Images\Tree2.png" />
+    <Resource Include="Images\Tree3.png" />
+    <Resource Include="Images\Tree4.png" />
+    <Resource Include="Images\Working.png" />
+    <Resource Include="Images\WorkPlaceImage.jpg">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Pages\ForestImage.jpg">

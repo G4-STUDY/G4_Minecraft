@@ -8,7 +8,7 @@
       d:DesignHeight="450" d:DesignWidth="800"
       Title="Forest">
     <Page.Background>
-        <ImageBrush ImageSource="ForestImage.jpg "
+        <ImageBrush ImageSource="../Images/ForestImage.png "
             Stretch="Fill"
             />
     </Page.Background>
@@ -23,17 +23,37 @@
         </Grid.RowDefinitions>
 
         <Label Content="피로도" HorizontalAlignment="Left" Margin="198,239,0,0" VerticalAlignment="Top" Width="68" FontSize="14" Grid.Row="1"/>
-        <Button Content="썩은 나무" Tag="0" x:Name="Tree1Btn" HorizontalAlignment="Left" VerticalAlignment="Top" Height="150" Width="200" FontSize="24" Margin="100,78,0,0" Click="Button_Click"  />
-        <Button Content="그냥 나무" Tag="1" x:Name="Tree2Btn" HorizontalAlignment="Center" Margin="0,78,0,0" VerticalAlignment="Top" Height="150" Width="200" FontSize="24" Grid.Column="1" Click="Button_Click"/>
-        <Button Content="사과 나무" Tag="2" x:Name="Tree3Btn" HorizontalAlignment="Center" VerticalAlignment="Top" Height="150" Width="200" FontSize="24" Grid.Row="1" Margin="0,66,0,0" Click="Button_Click"/>
-        <Button Content="세계수" Tag="3" x:Name="Tree4Btn" HorizontalAlignment="Left" VerticalAlignment="Top" Height="150" Width="200" FontSize="24" Grid.Column="1" Grid.Row="1" Margin="103,66,0,0" Click="Button_Click"/>
+        <Button Content="썩은 나무" Foreground="White" ToolTip="클릭해서 채집" ToolTipService.InitialShowDelay="0" ToolTipService.ShowDuration="100000" VerticalContentAlignment="Bottom" Tag="0" x:Name="Tree1Btn" HorizontalAlignment="Left" VerticalAlignment="Top" Height="150" Width="200" FontSize="24" Margin="100,78,0,0" Click="Button_Click" Cursor="Hand"  >
+            <Button.Background>
+                <ImageBrush ImageSource="/Images/Tree1.png" Stretch="Fill"></ImageBrush>
+            </Button.Background>
+        </Button>
+
+        <Button Content="참나무" Foreground="White" ToolTip="클릭해서 채집" ToolTipService.InitialShowDelay="0" ToolTipService.ShowDuration="100000" VerticalContentAlignment="Bottom" Tag="1" x:Name="Tree2Btn" HorizontalAlignment="Center" Margin="0,78,0,0" VerticalAlignment="Top" Height="150" Width="200" FontSize="24" Grid.Column="1" Click="Button_Click" Cursor="Hand">
+            <Button.Background>
+                <ImageBrush ImageSource="/Images/Tree2.png" Stretch="Fill"></ImageBrush>
+            </Button.Background>
+        </Button>
+        <Button Content="사과 나무" Foreground="White" ToolTip="클릭해서 채집" ToolTipService.InitialShowDelay="0" ToolTipService.ShowDuration="100000" VerticalContentAlignment="Bottom"  Tag="2" x:Name="Tree3Btn" HorizontalAlignment="Center" VerticalAlignment="Top" Height="150" Width="200" FontSize="24" Grid.Row="1" Margin="0,66,0,0" Click="Button_Click" Cursor="Hand">
+            <Button.Background>
+                <ImageBrush ImageSource="/Images/Tree3.png" Stretch="Fill"></ImageBrush>
+            </Button.Background>
+        </Button>
+        <Button Content="세계수" Foreground="White" ToolTip="클릭해서 채집" ToolTipService.InitialShowDelay="0" ToolTipService.ShowDuration="100000" VerticalContentAlignment="Bottom"  Tag="3" x:Name="Tree4Btn" HorizontalAlignment="Left" VerticalAlignment="Top" Height="150" Width="200" FontSize="24" Grid.Column="1" Grid.Row="1" Margin="103,66,0,0" Click="Button_Click" Cursor="Hand">
+            <Button.Background>
+                <ImageBrush ImageSource="/Images/Tree4.png" Stretch="Fill"></ImageBrush>
+            </Button.Background>
+        </Button>
+        <Button Content="뒤로가기" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="32" Width="66" Click="Button_Click_1"/>
+
         <ProgressBar x:Name="CharHp"  HorizontalAlignment="Left" Height="13" Margin="281,254,0,0" Maximum="{Binding MxHp}" VerticalAlignment="Top" Width="238" Grid.Row="1" Grid.ColumnSpan="2"/>
         <ProgressBar x:Name="Tree1Hp" Tag="0" HorizontalAlignment="Center" Height="24" Margin="0,49,0,0" VerticalAlignment="Top" Width="198" Visibility="Collapsed"/>
         <ProgressBar x:Name="Tree2Hp" Tag="1" HorizontalAlignment="Center" Height="24" Margin="0,49,0,0" VerticalAlignment="Top" Width="198" Grid.Column="1" Visibility="Collapsed"/>
         <ProgressBar x:Name="Tree3Hp" Tag="2" HorizontalAlignment="Center" Height="24" Margin="0,37,0,0" VerticalAlignment="Top" Width="198" Grid.Row="1" Visibility="Collapsed"/>
         <ProgressBar x:Name="Tree4Hp" Tag="3" HorizontalAlignment="Left" Height="24" Margin="105,37,0,0" VerticalAlignment="Top" Width="198" Grid.Column="1" Grid.Row="1" Visibility="Collapsed"/>
-        <Button Content="뒤로가기" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="32" Width="66" Click="Button_Click_1"/>
 
 
     </Grid>
 </Page>
+
+
